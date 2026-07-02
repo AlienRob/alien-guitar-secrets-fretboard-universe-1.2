@@ -1,0 +1,51 @@
+- [One mobile app per project](one-mobile-app-limit.md) — Replit hard-limits one Expo artifact per project; second mobile app must go in a separate Replit project.
+- [Vault first-visit celebration](vault-first-visit-celebration.md) — "seen-set empty" is NOT a reliable first-visit signal; use an explicit init flag.
+- [Guitar handedness rendering](guitar-handedness.md) — GuitarArt is right-handed by default; left = SVG group mirror; hardware is data-driven in guitars.ts.
+- [Enharmonic note spelling](note-spelling.md) — spell scales/chords by letter-per-degree, not raw flat chromatic table; else you get invalid spellings like A+Ab.
+- [spellChord key not label](spellchord-key-not-label.md) — pass the chord KEY ("7"/"maj7"), not a label ("C7"); unknown names silently fall back to wrong sharp spelling.
+- [Guitar photo logo tape](guitar-photo-tape.md) — cover AI guitar brand logos with a black artist-tape strip; overlay/headless-crop approaches were rejected as ugly.
+- [OpenAPI body naming](openapi-body-naming.md) — never name a request-body component `<OperationId>Body`; Orval already generates that zod name → TS2308 duplicate export.
+- [FretFlow email gate](fretflow-email-gate.md) — intentionally a soft localStorage lead-capture gate (free app); don't add server-side auth enforcement.
+- [Daily Practice routine](daily-practice-routine.md) — timed 3-of-5 discipline routine is a soft client-side localStorage system; don't server-enforce; Fretboard Explorer is never a scored discipline.
+- [Stripe source of truth](stripe-source-of-truth.md) — products/prices read live from Stripe API, not DB; change pricing in Stripe, then republish.
+- [Portable zip export](portable-zip-export.md) — no zip CLI + git stash blocked; build via git archive + overlay + Node zip encoder, exclude .replit/export dirs.
+- [Guitar silhouette paths](guitar-silhouettes.md) — BODY_PATHS duplicated in guitar-art.tsx + guitar3d.ts (keep in sync); hardware coords not clipped, can spill outside body.
+- [Lesson diagrams from PDFs](lesson-diagrams-from-pdf.md) — use Rob's own figures via pdftoppm render + crop (arrows are vector, so don't use pdfimages); frame on white.
+- [Greeting audio playback](greeting-audio.md) — gesture-gate audio start (not the exit click), duck music under voiceover, use mutedRef to avoid stale closures, clear timers on unmount.
+- [Clerk login methods](clerk-login-methods.md) — enable email+password vs email-code in the Auth pane (not code); prebuilt SignIn/SignUp adapt automatically.
+- [Clerk OTP code box on mobile](clerk-otp-mobile.md) — don't put overflow-hidden on cardBox; unlayered CSS keeps the 6 code boxes unclipped + 16px font stops iOS zoom.
+- [Stripe freemium enforcement](stripe-freemium.md) — isPremium is server-derived; checkout must allowlist client priceId; graceful degradation when stripe schema absent.
+- [Embedded-iframe auth](iframe-auth-bearer.md) — all API 401s in canvas iframe = blocked Clerk cookie; fix with setAuthTokenGetter → Bearer token.
+- [Lesson narration voice](lesson-narration-voice.md) — reuse ElevenLabs "George" @ speed 0.88, pitched a whole tone down (ffmpeg), for all lesson voiceovers ("Zashtar").
+- [Animation/feature toggle gating](cinematic-toggle-gating.md) — gate behavior off in-memory React state, not a localStorage read at trigger time; storage is persistence only.
+- [Guitar dual renderer parity](guitar-dual-renderer.md) — new shapes/finishes/hardware must land in BOTH guitar-art.tsx (SVG) and guitar3d.ts (3D), and all GuitarArt call sites.
+- [Vitest setup in Vite artifacts](vitest-artifact-setup.md) — needs standalone vitest.config.ts (app vite.config throws without PORT/BASE_PATH) + jsdom polyfills.
+- [Avatar species & renderer](avatar-species.md) — avatar is now live 3D .glb per species+gender (WebGL), 2D photo is the fallback; hair colour only affects the photo.
+- [GLB avatar compression](glb-avatar-compression.md) — shrink huge uploaded character .glb with gltf-transform meshopt+webp@1024, no simplify; meshopt not draco (drei bundles decoder).
+- [Practice answer lock](practice-answer-lock.md) — immediate-submit practice pages need a synchronous useRef per-question lock; currentIndex/result guard alone allows duplicate review rows + double submit on Q10.
+- [Gear catalog/render sync](gear-catalog-render-sync.md) — new PickFinish/StrapPattern value needs a render branch in gear-thumb.tsx (silent fallback); pedals are now PNG images, not procedural.
+- [AGS XP lever](ags-xp-lever.md) — quest xpReward is NEVER credited to users; per-drill computeXpForChallenge is the ONLY XP source, so it's the only lever for level/guitar pacing.
+- [Chord diagram data (chords-db)](chord-diagrams-db.md) — frets are low-E→high-E (reverse STRINGS); baseFret>1 is relative; DB keys use Csharp/Fsharp + single enharmonic; root highlight must cover open+barre strings.
+- [Zashtar narration recipe](zashtar-narration-recipe.md) — exact ElevenLabs + ffmpeg pitch-down recipe for module voiceovers; don't regenerate existing mp3s (costs credits).
+- [AGS mobile app](ags-mobile-app.md) — Expo phone app; theory/drills are a hand-synced COPY of the web app, Phase 1 is on-device only, one always-dark theme.
+- [Expo Android stale cache fix](expo-android-cache.md) — Android "1 module" bundle = stale Metro cache; `--clear` flag in dev script fixes it.
+- [Mobile mic pitch detection](mobile-mic-pitch.md) — Note Check mic capture is web-only on purpose; native needs a native audio module (breaks Expo Go) + on-device testing + user consent.
+- [Hall vortex layering](hall-vortex-layering.md) — spinning vortex must sit BEHIND hall art with a transparent arch (pillars mask its edges); black-fill all non-arch transparency.
+- [Recoloring outline logos](logo-outline-thinning.md) — tinting + downscaling a thin-outline wordmark collapses its alpha to near-invisible; thicken, upscale target, boost alpha, dark shadow.
+- [Hall cabinet browser](hall-cabinet-browser.md) — /hall gated premium(vortex) vs free(cabinet); branch on Clerk <Show> not usePremium (anon 401 hangs); cabinet guitar sized by width into the hanger cradle.
+- [Guitar photos transparent](guitar-photos-transparent.md) — catalog guitar PNGs are background-removed (transparent); keep new ones transparent or they show a box in the cabinet/hall.
+- [Boss Battles gating & XP](boss-battles.md) — hybrid: level unlocks boss planet, NEXT system stays locked till boss beaten; /boss route + galaxy must share the gate; boss XP bonus re-checked server-side at 80%.
+- [Rig share image capture](rig-share-image-capture.md) — html-to-image toPng must await all descendant <img> decode first, or the PNG captures half-loaded assets.
+- [Hall .glb guitar models](hall-glb-models.md) — real 3D models load only on the Hall centrepiece via a Guitar `model3d` key; wall niches stay cheap GuitarThumb; no module-scope preload.
+- [3D pick viewer](pick-3d-viewer.md) — two synced copies (app + mockup); two-tone picks need a baked gradient map (solid color renders flat); front=logo/back=label; dispose runtime CanvasTextures.
+- [WebGL grid single context](webgl-grid-single-context.md) — many 3D items = ONE Canvas (per-item canvases blow the context limit); screenshot tool's headless browser has no WebGL.
+- [Tall mockup capture](mockup-tall-capture.md) — external_url screenshots crop tall previews at ~1080px; use app_preview + tall viewport_size; resize multi-MB images or they render blank.
+- [SVG inside Animated.View](svg-animated-view.md) — react-native-svg elements are frozen native nodes; putting them inside Animated.View crashes with "cannot add a new property".
+- [Metronome click loudness](metronome-click-loudness.md) — pure sine clicks sound quiet; fix with noise-snap transient blend + full-scale amplitudes; bump cache filename version to force WAV regeneration.
+- [expo-av Android sound playback](expo-av-android-sound.md) — expo-audio createAudioPlayer silently drops file:// URIs on Android; use expo-av createAsync + await setAudioModeAsync first + replayAsync not playAsync.
+- [Alien Coins economy](alien-coins-economy.md) — coins stored in progress context (mobile AsyncStorage) and playerCustomization (web localStorage); web earned gear re-derives after claim by bumping an earnedGearKey state counter.
+- [Bag & Coin Monetization Plan](bag-coin-monetization.md) — future paid bags/coins via Stripe (web) + RevenueCat (mobile); revisit one-bag-per-session cap when live.
+- [Tuner pitch detection](tuner-pitch-detection.md) — hybrid FFT+autocorrelation; corr(2T)≈corr(T) makes lag-doubling harmonic correction always over-shift; use FFT bins for octave, autocorr constrained ±4st for cents.
+- [Tuner D/G string detection](tuner-dg-detection.md) — mid strings D3/G3 fail due to shorterPeriodPenalty threshold too low (0.86/0.45); raise to 0.93/0.52, reduce base penalty 0.38→0.20; also add freq/3 candidate to pickBestTarget.
+- [Boss guitar intro cinematic](boss-guitar-intro.md) — "solo" phase before BattleIntro; 10 synthesized licks in BOSS_LICK_DEFS; Sound.replayAsync returns AVPlaybackStatus not void (use any type in Map).
+- [react-native-svg touch interference](react-native-svg-touch.md) — SVG native views intercept Android touches even with pointerEvents="none"; fix = plain View as last child with onStartShouldSetResponder. Also: GameNeck col 0=low E, musicTheory string 0=high e — always flip with 5-col.

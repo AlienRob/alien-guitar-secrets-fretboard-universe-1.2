@@ -1,0 +1,20 @@
+# Replit runtime folders — match at any depth so the git-root copies are caught
+**/.pythonlibs/
+**/.cache/
+**/.local/
+**/.eas-tmp/
+**/.nix/
+**/.upm/
+**/.agents/
+
+# Other artifacts not needed for the mobile build
+artifacts/ags-fretboard/
+artifacts/ags-intro-video/
+artifacts/api-server/
+artifacts/mockup-sandbox/
+artifacts/ags-precision-labs/
+
+# Build outputs and deps (EAS reinstalls these on its servers)
+**/node_modules/
+**/dist/
+**/.expo/

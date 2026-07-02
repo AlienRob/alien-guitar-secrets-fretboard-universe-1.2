@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="360" viewBox="0 0 280 360">
+  <defs>
+    <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#15181f"/>
+      <stop offset="42%" stop-color="#3b414f"/>
+      <stop offset="62%" stop-color="#2c313c"/>
+      <stop offset="100%" stop-color="#101218"/>
+    </linearGradient>
+    <linearGradient id="sheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="30%" stop-color="#ffffff" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.30"/>
+    </linearGradient>
+    <radialGradient id="rim" cx="50%" cy="22%" r="70%">
+      <stop offset="0%" stop-color="#34d3c0" stop-opacity="0"/>
+      <stop offset="82%" stop-color="#34d3c0" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#34d3c0" stop-opacity="0.45"/>
+    </radialGradient>
+    <radialGradient id="peg" cx="38%" cy="34%" r="70%">
+      <stop offset="0%" stop-color="#f4f6f8"/>
+      <stop offset="55%" stop-color="#b9c0c8"/>
+      <stop offset="100%" stop-color="#6b7178"/>
+    </radialGradient>
+  </defs>
+
+  <!-- headstock body (symmetric, original shape) -->
+  <path id="hs" d="M105 350 L105 322
+        C92 306 74 298 71 256
+        L71 132
+        C71 86 96 58 113 46
+        Q140 31 167 46
+        C184 58 209 86 209 132
+        L209 256
+        C206 298 188 306 175 322
+        L175 350 Z"
+        fill="url(#wood)" stroke="#05070b" stroke-width="2"/>
+  <use href="#hs" fill="url(#sheen)"/>
+  <use href="#hs" fill="url(#rim)"/>
+
+  <!-- string posts (inner) -->
+  <g>
+    <circle cx="120" cy="150" r="5" fill="#0a0c10"/>
+    <circle cx="120" cy="200" r="5" fill="#0a0c10"/>
+    <circle cx="120" cy="250" r="5" fill="#0a0c10"/>
+    <circle cx="160" cy="150" r="5" fill="#0a0c10"/>
+    <circle cx="160" cy="200" r="5" fill="#0a0c10"/>
+    <circle cx="160" cy="250" r="5" fill="#0a0c10"/>
+  </g>
+  <!-- tuner buttons (outer) -->
+  <g>
+    <ellipse cx="64" cy="150" rx="13" ry="7" fill="url(#peg)" stroke="#3a3f45" stroke-width="1"/>
+    <ellipse cx="64" cy="200" rx="13" ry="7" fill="url(#peg)" stroke="#3a3f45" stroke-width="1"/>
+    <ellipse cx="64" cy="250" rx="13" ry="7" fill="url(#peg)" stroke="#3a3f45" stroke-width="1"/>
+    <ellipse cx="216" cy="150" rx="13" ry="7" fill="url(#peg)" stroke="#3a3f45" stroke-width="1"/>
+    <ellipse cx="216" cy="200" rx="13" ry="7" fill="url(#peg)" stroke="#3a3f45" stroke-width="1"/>
+    <ellipse cx="216" cy="250" rx="13" ry="7" fill="url(#peg)" stroke="#3a3f45" stroke-width="1"/>
+    <rect x="78" y="147" width="14" height="6" rx="2" fill="#9aa0a7"/>
+    <rect x="78" y="197" width="14" height="6" rx="2" fill="#9aa0a7"/>
+    <rect x="78" y="247" width="14" height="6" rx="2" fill="#9aa0a7"/>
+    <rect x="188" y="147" width="14" height="6" rx="2" fill="#9aa0a7"/>
+    <rect x="188" y="197" width="14" height="6" rx="2" fill="#9aa0a7"/>
+    <rect x="188" y="247" width="14" height="6" rx="2" fill="#9aa0a7"/>
+  </g>
+
+  <!-- AGS wordmark -->
+  <text x="140" y="104" text-anchor="middle" font-family="DejaVu Sans, Arial, sans-serif"
+        font-size="34" font-weight="bold" letter-spacing="3"
+        fill="#34d3c0" stroke="#0a3b36" stroke-width="0.6">AGS</text>
+
+  <!-- nut -->
+  <rect x="103" y="344" width="74" height="10" rx="2" fill="#e9e1cf" stroke="#b3ab97" stroke-width="0.8"/>
+</svg>

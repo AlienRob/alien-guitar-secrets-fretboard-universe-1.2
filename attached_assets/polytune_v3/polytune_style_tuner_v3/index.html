@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fretboard Universe Stable Guitar Tuner V2</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="tuner-card">
+      <h1>Stable Guitar Tuner V2</h1>
+      <p class="subtitle">Guitar-string locked pitch detection: E A D G B E</p>
+      <button id="startBtn">Start Tuner</button>
+      <div class="meter">
+        <div class="scale"><span>-50</span><span>-25</span><span>0</span><span>+25</span><span>+50</span></div>
+        <div class="needle" id="needle"></div>
+        <div class="center-zone"></div>
+      </div>
+      <div class="readout">
+        <div class="note" id="noteName">--</div>
+        <div class="target" id="targetName">Standard guitar</div>
+        <div class="cents" id="cents">0 cents</div>
+        <div class="freq" id="frequency">-- Hz</div>
+        <div class="status" id="status">Waiting for microphone…</div>
+      </div>
+      <div class="strings" id="strings">
+        <div class="string s6" data-note="E2"><span>E</span></div>
+        <div class="string s5" data-note="A2"><span>A</span></div>
+        <div class="string s4" data-note="D3"><span>D</span></div>
+        <div class="string s3" data-note="G3"><span>G</span></div>
+        <div class="string s2" data-note="B3"><span>B</span></div>
+        <div class="string s1" data-note="E4"><span>E</span></div>
+      </div>
+      <p class="tip">Tip: pluck one open string cleanly and mute the others. Use headphones or a direct interface for best testing.</p>
+    </section>
+  </main>
+  <script src="tuner-engine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

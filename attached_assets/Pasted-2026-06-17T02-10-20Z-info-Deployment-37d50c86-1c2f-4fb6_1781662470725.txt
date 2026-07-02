@@ -1,0 +1,208 @@
+2026-06-17T02:10:20Z info: Deployment: 37d50c86-1c2f-4fb6-8ba8-f31ec6eef7e0
+2026-06-17T02:10:20Z info: Build: a4b1a1c2-b87f-4d8c-b1f5-e2f21d512157
+2026-06-17T02:10:22Z info: Running Security Scan
+2026-06-17T02:10:26Z info: Installing packages
+--> pnpm install
+
+Scope: all 11 workspace projects
+
+Lockfile is up to date, resolution step is skipped
+
+
+   ╭─────────────────────────────────────────╮
+   │                                         │
+   │   Update available! 10.26.1 → 11.7.0.   │
+   │   Changelog: https://pnpm.io/v/11.7.0   │
+   │    To update, run: pnpm add -g pnpm     │
+   │                                         │
+   ╰─────────────────────────────────────────╯
+
+
+Already up to date
+
+. preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+
+. preinstall: Done
+
+Done in 5.6s using pnpm v10.26.1
+
+2026-06-17T02:10:33Z info: Starting Build
+
+> @workspace/api-server@0.0.0 build /home/runner/workspace/artifacts/api-server
+> node ./build.mjs
+
+
+
+  dist/index.mjs                       3.2mb ⚠️
+  dist/pino-worker.mjs               153.5kb
+  dist/pino-file.mjs                 142.1kb
+  dist/pino-pretty.mjs               114.7kb
+  dist/thread-stream-worker.mjs        7.4kb
+  dist/index.mjs.map                   5.0mb
+  dist/pino-worker.mjs.map           256.9kb
+  dist/pino-file.mjs.map             229.0kb
+  dist/pino-pretty.mjs.map           204.0kb
+  dist/thread-stream-worker.mjs.map   12.0kb
+
+⚡ Done in 817ms
+
+
+> @workspace/ags-fretboard@0.0.0 build /home/runner/workspace/artifacts/ags-fretboard
+> vite build --config vite.config.ts
+
+
+vite v7.3.5 building client environment for production...
+
+transforming...
+
+src/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+
+src/components/ui/select.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+
+✓ 3551 modules transformed.
+
+rendering chunks...
+
+computing gzip size...
+
+dist/public/index.html                                                                         1.71 kB │ gzip:     0.64 kB
+
+dist/public/assets/G3-CpaZXbWB.mp3                                                            14.98 kB
+dist/public/assets/E2-9WSbWhXm.mp3                                                            15.21 kB
+dist/public/assets/D3-CnGpi19N.mp3                                                            15.34 kB
+dist/public/assets/A4-DGVjv2Gk.mp3                                                            15.71 kB
+dist/public/assets/C5-wvSiHobt.mp3                                                            16.02 kB
+dist/public/assets/A2-3IjeSGZa.mp3                                                            16.20 kB
+dist/public/assets/B3-_PQ_E6a9.mp3                                                            16.41 kB
+dist/public/assets/E5-CFoCUrAk.mp3                                                            16.88 kB
+dist/public/assets/E4-Cn6LYbBn.mp3                                                            17.97 kB
+dist/public/assets/finding-notes-formula-3-BrKfaSeV.png                                       28.97 kB
+dist/public/assets/finding-notes-formula-5-DzoFFllR.png                                       29.50 kB
+dist/public/assets/finding-notes-formula-4-CDkFojrl.png                                       31.35 kB
+dist/public/assets/finding-notes-formula-2-CN9hlR9B.png                                       39.01 kB
+dist/public/assets/finding-notes-formula-1-CIZB5Elj.png                                       79.76 kB
+dist/public/assets/ags_horizontal_logo_nobg-C9RGfwQv.png                                     118.77 kB
+dist/public/assets/levelup_shred_lick-DmY7bw7f.mp3                                           128.36 kB
+dist/public/assets/AGS_Pick_Template__Eyes_Green_1780383489732-Ddf4jEAj.png                  287.09 kB
+dist/public/assets/vortex-vanguard-CAdmJk6v.png                                              347.61 kB
+dist/public/assets/demon-axe-NSwnoPLm.png                                                    369.04 kB
+dist/public/assets/plasma-drifter-C0rQeNiB.png                                               403.46 kB
+dist/public/assets/meteor-mauler-CaFkjKpm.png                                                414.61 kB
+dist/public/assets/black-strat-F8GLFujK.png                                                  419.28 kB
+
+dist/public/assets/asteroid-axe-back-B28ErT3s.png                                          1,107.76 kB
+dist/public/assets/yngwie-cream-back-Fd4EutcD.png                                          1,126.31 kB
+dist/public/assets/starchild-iceman-back-fqlwcBa9.png                                      1,133.78 kB
+dist/public/assets/demon-axe-back-Co5UrjTS.png                                             1,142.92 kB
+dist/public/assets/quasar-quake-back-7I05Or3I.png                                          1,168.52 kB
+dist/public/assets/majesty-back-CJXfFQIJ.png                                               1,173.63 kB
+dist/public/assets/singularity-shredder-back-B6XKGGdK.png                                  1,174.94 kB
+dist/public/assets/jem-floral-back-BO9dJvbo.png                                            1,180.85 kB
+
+dist/public/assets/greeny-burst-back-DuoxAN7A.png                                          1,296.40 kB
+dist/public/assets/lunar-lancer-back-D8CeBZLA.png                                          1,324.25 kB
+dist/public/assets/ags-masterpiece-back-BhabTpY0.png                                       1,329.51 kB
+
+dist/public/assets/at-burst-back-DFqr4VPd.png                                              1,372.48 kB
+dist/public/assets/n4-natural-back-Dhfh0gd9.png                                            1,377.87 kB
+dist/public/assets/avatar_human_male_violet-BcbMZeSM.png                                   1,454.54 kB
+
+dist/public/assets/avatar_human_female_violet-B-0d-rrx.png                                 1,512.59 kB
+dist/public/assets/avatar_human_female_blonde-BCTWHukV.png                                 1,518.58 kB
+dist/public/assets/practice_ambient_cosmic-DjQMXJuN.mp3                                    1,521.00 kB
+dist/public/assets/avatar_human_male_brown-DK2kmdQZ.png                                    1,522.66 kB
+dist/public/assets/avatar_pleiadian_female_silver-C_bpBqSi.png                             1,523.50 kB
+dist/public/assets/avatar_human_female_blue-8l1Gf8gg.png                                   1,524.88 kB
+dist/public/assets/avatar_pleiadian_female_brown-EVYoRJqp.png                              1,526.09 kB
+
+dist/public/assets/avatar_human_female_red-Cl7ossG5.png                                    1,533.73 kB
+dist/public/assets/singularity-shredder-WuBUOVbH.png                                       1,543.18 kB
+dist/public/assets/avatar_human_male_silver-CfzRclEY.png                                   1,544.24 kB
+dist/public/assets/avatar_pleiadian_male_blue-BNmVcg4d.png                                 1,549.02 kB
+dist/public/assets/avatar_nordic_female_blue-BF3sKIur.png                                  1,559.16 kB
+dist/public/assets/avatar_pleiadian_female_blonde-CeWYtsWI.png                             1,559.64 kB
+
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+
+
+> @workspace/ags-mobile@0.0.0 build /home/runner/workspace/artifacts/ags-mobile
+> node scripts/build.js
+
+
+Preparing build directories...
+
+Build: 1781662252391-224
+Clearing Metro cache...
+Cache cleared
+
+Starting Metro...
+
+Setting EXPO_PUBLIC_DOMAIN=fretboard-universe.replit.app
+Setting EXPO_PUBLIC_REPL_ID=a4b1a1c2-b87f-4d8c-b1f5-e2f21d512157
+
+[Metro] Starting project at /home/runner/workspace/artifacts/ags-mobile
+
+[Metro] React Compiler enabled
+
+[Metro] Starting Metro Bundler
+
+[Metro] Waiting on http://localhost:8081
+Logs for your project will appear below.
+
+Downloading: http://localhost:8081/artifacts/ags-mobile/node_modules/expo-router/entry.bundle?platform=ios&dev=false&hot=false&lazy=false&minify=true
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓░░░░░░░░░░░░░ 21.8% (114/434)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓░░░░░░░░░░░░░ 21.8% (297/644)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓░░░░░░░░░░░ 34.2% (574/990)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓░░░░░░░░░░ 40.6% ( 847/1330)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓░░░░░░░ 61.4% (1149/1475)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓░░░░░░ 66.2% (1270/1688)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓░░░░░░ 66.2% (1374/1726)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓░░░░░ 72.7% (1519/1815)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓░░░░ 79.0% (1662/2131)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓░░░░ 79.0% (1686/2146)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓░░░░ 79.0% (1839/2211)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓░░░░ 79.0% (1898/2221)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓░░░░ 79.3% (1981/2225)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 87.3% (2088/2235)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 90.5% (2146/2256)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 93.0% (2230/2317)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░ 93.0% (2231/2317)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 94.4% (2386/2512)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 94.4% (2564/2676)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 94.4% (2718/2821)
+
+[Metro] iOS node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 96.0% (2909/2978)
+
+[Metro] iOS Bundling failed 74939ms node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js (3070 modules)
+
+Download failed: HTTP 500
+
+/home/runner/workspace/artifacts/ags-mobile:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/ags-mobile@0.0.0 build: `node scripts/build.js`
+Exit status 1

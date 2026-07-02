@@ -1,0 +1,6 @@
+{
+  "name": "@workspace/native-metronome",
+  "version": "1.0.0",
+  "description": "Native iOS metronome using AVAudioEngine — requires EAS build, not available in Expo Go",
+  "main": "index.js"
+}

@@ -1,0 +1,25 @@
+MASTER IMAGE PROMPT FOR EACH WARDROBE ASSET
+
+Create one wearable clothing/accessory asset for the Fretboard Universe avatar wardrobe system.
+
+Transparent PNG.
+One item only.
+No character.
+No mannequin.
+No background.
+No text.
+No watermark.
+Front view only.
+Perfectly centred.
+Designed as a layer to sit over a full-body game avatar.
+Photorealistic premium mobile game asset.
+Same visual style as Fretboard Universe.
+Purple, black, cosmic blue and gold AGS-inspired palette where appropriate.
+Sharp edges.
+Clean alpha transparency.
+
+Item to create:
+[INSERT ITEM NAME]
+
+Asset filename:
+[INSERT FILE NAME]

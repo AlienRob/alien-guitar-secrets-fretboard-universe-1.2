@@ -1,0 +1,231 @@
+BUILD: Precision Labs — standalone Expo mobile app (App Store + Google Play)
+
+=============================================================================
+WHAT TO BUILD
+=============================================================================
+
+A standalone Expo / React Native app with exactly two tools:
+  1. A chromatic guitar tuner
+  2. A metronome
+
+This is NOT a learning app. No drills, no XP, no login, no database.
+Just the two tools, polished and professional.
+
+=============================================================================
+APP IDENTITY
+=============================================================================
+
+App name:         Precision Labs: Tools for Practicing Musicians
+Developer name:   Alien Guitar Secrets
+iOS bundle ID:    au.com.alienguitarsecrets.precisionlabs
+Android package:  au.com.alienguitarsecrets.precisionlabs
+Version:          1.0.0
+
+=============================================================================
+MONETIZATION
+=============================================================================
+
+Free tier:
+  - Full tuner and metronome available but with the feature limits below
+  - Banner ad at the bottom of each tool screen (Google AdMob)
+  - RevenueCat paywall modal when user tries to access a locked feature
+
+Paid tier: $14.99 / year via RevenueCat
+  - All features unlocked
+  - No ads
+
+RevenueCat account is already set up. Wire isPremium from a usePremium() hook
+that reads RevenueCat entitlement status. Default to false until configured.
+
+For AdMob: add a placeholder <AdBanner /> component at the bottom of tuner
+and metronome screens. The real AdMob App ID and Unit IDs will be configured
+later — use placeholder test IDs for now.
+
+=============================================================================
+FEATURE GATES (free vs paid)
+=============================================================================
+
+TUNER — free tier locked to:
+  - Electric guitar only (no bass, acoustic, ukulele)
+  - 6 strings only (no 4, 7, 8 string options)
+  - Standard tuning only: E A D G B E (index 0, no alternate tunings)
+  - A4 reference pitch fixed at 440 Hz (no adjustment)
+
+TUNER — paid unlocks:
+  - All instruments: electric, acoustic, bass, ukulele
+  - All string counts available per instrument
+  - All alternate tunings (Drop D, Open G, DADGAD, etc.)
+  - Adjustable A4 reference pitch: 430–450 Hz
+
+METRONOME — free tier locked to:
+  - Three time signatures only: 4/4, 3/4, and 6/8
+  - Classic click sound only
+  - No colour themes (grey/neutral accent only)
+
+METRONOME — paid unlocks:
+  - All time signatures (1–12 beats, denominator 2/4/8/16)
+  - All subdivisions (1/4 through 1/64, including triplets)
+  - All click sounds: Classic, Woodblock, Electro, Cosmic
+  - All colour accent themes (Red, Orange, Gold, Green, Cyan, Purple, Pink)
+  - Accent beat control and per-beat muting
+
+=============================================================================
+DESIGN — IMPORTANT
+=============================================================================
+
+This app must look like it belongs to the AGS (Alien Guitar Secrets) family.
+Use the cosmic dark space theme throughout.
+
+The zip file contains the exact source files from the AGS mobile app.
+DO NOT redesign from scratch. Use those files directly:
+
+  constants/colors.ts          — the exact color palette (use this as-is)
+  hooks/useColors.ts           — the colors hook (use this as-is)
+  components/screen-bg.tsx     — cosmic dark background (use this as-is)
+  components/scroll-picker.tsx — scroll picker UI (use this as-is)
+  components/upgrade-modal.tsx — paywall modal (adapt: change copy to show
+                                  $14.99/year price + Subscribe button)
+
+The tuner and metronome screens are in:
+  app/tuner.tsx      — complete, working tuner screen
+  app/metronome.tsx  — complete, working metronome screen
+
+These are the FINAL, POLISHED screens from the AGS app.
+Copy them into the new app with minimal changes:
+  - Change: const isPremium = true  →  const isPremium = usePremium();
+  - Add import for usePremium hook
+  - Add <AdBanner /> at the bottom for free users
+
+The hub/home screen (app/precision-labs-hub.tsx) shows two cards:
+Tuner and Metronome. Use it as the index screen.
+
+=============================================================================
+ASSETS — all in the zip under assets/
+=============================================================================
+
+assets/images/icon.png                    — app icon (use as-is in app.json)
+assets/images/logo-horizontal.png         — horizontal logo (splash screen)
+assets/images/ags-wordmark.png            — wordmark
+assets/images/nebula-bg.png              — nebula background
+assets/images/alien-inlay.png            — alien inlay graphic
+assets/images/tuner/space_background.png         — tuner screen background
+assets/images/tuner/AGS_logo_nobg.png            — logo for tuner header
+assets/images/tuner/fretboard_with_nut.png       — fretboard image for tuner
+assets/images/tuner/fretboard_cosmic_glow_overlay.png
+assets/images/tuner/bottom_panel.png
+assets/images/tuner/dropdown_bar.png
+
+Place ALL of these under assets/ in the new project, preserving folder structure.
+
+=============================================================================
+LIB FILES — all in the zip under lib/
+=============================================================================
+
+lib/tunerData.ts          — all tuning presets for all instruments/strings
+lib/tunerPitch.ts         — pitch detection (Web Audio API path)
+lib/tuner/types.ts
+lib/tuner/PitchDetectorMPM.ts
+lib/tuner/PitchSmoother.ts
+lib/tuner/webviewHtml.ts  — WebView HTML for native microphone access
+lib/metronome.ts          — MetronomeEngine + IOSNativeMetronomeAdapter
+
+hooks/useTunerPitch.ts    — web tuner hook
+hooks/useNativeTuner.ts   — native tuner hook (uses WebView on iOS/Android)
+
+=============================================================================
+NAVIGATION
+=============================================================================
+
+Simple stack navigator (expo-router):
+  /           → Precision Labs hub (two tool cards: Tuner, Metronome)
+  /tuner      → Tuner screen
+  /metronome  → Metronome screen
+
+No tab bar needed. Each screen has its own back button (already in the code).
+
+=============================================================================
+app.json CONFIG
+=============================================================================
+
+{
+  "expo": {
+    "name": "Precision Labs",
+    "slug": "precision-labs",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/logo-horizontal.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#050816"
+    },
+    "ios": {
+      "bundleIdentifier": "au.com.alienguitarsecrets.precisionlabs",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSMicrophoneUsageDescription": "Precision Labs uses your microphone to detect the pitch of your instrument for the chromatic tuner."
+      }
+    },
+    "android": {
+      "package": "au.com.alienguitarsecrets.precisionlabs",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ]
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      ["expo-audio", {
+        "microphonePermission": "Precision Labs uses your microphone to detect the pitch of your instrument for the chromatic tuner."
+      }]
+    ]
+  }
+}
+
+=============================================================================
+KEY DEPENDENCIES (match these versions exactly)
+=============================================================================
+
+expo: ~54.0.27
+expo-router: ~6.0.17
+react-native: 0.81.5
+react-native-svg: 15.12.1
+react-native-webview: ^14.0.1
+react-native-safe-area-context: ~5.6.0
+react-native-screens: ~4.16.0
+expo-av: ^16.0.8
+expo-audio: ~1.1.1
+expo-haptics: ~15.0.8
+expo-linear-gradient: ~15.0.8
+@expo/vector-icons: ^15.0.3
+@react-native-async-storage/async-storage: 2.2.0
+expo-symbols: ~1.0.8
+
+=============================================================================
+WHAT NOT TO DO
+=============================================================================
+
+- Do NOT add learning features, drills, XP, levels, or progress tracking
+- Do NOT add login or accounts (no Clerk, no auth)
+- Do NOT add a database
+- Do NOT redesign the tuner or metronome screens — use the code from the zip
+- Do NOT change the color palette — use constants/colors.ts from the zip
+- Do NOT add a tab bar — use simple stack navigation
+
+=============================================================================
+DONE WHEN
+=============================================================================
+
+- App runs in Expo Go preview
+- Hub screen shows Tuner and Metronome cards
+- Tuner screen works (listens via mic, shows note and cents)
+- Metronome screen works (plays clicks, tap tempo, beat blocks)
+- Free-tier gates show the upgrade modal when locked features are tapped
+- Ad banner placeholder visible at bottom of each screen for free users
+- app.json has the correct bundle IDs
+- eas.json is present and configured for production builds
+
+=============================================================================

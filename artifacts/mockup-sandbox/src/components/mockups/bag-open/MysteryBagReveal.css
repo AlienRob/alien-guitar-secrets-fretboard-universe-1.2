@@ -1,0 +1,206 @@
+.mbr-scene {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: transparent;
+  user-select: none;
+}
+
+/* ── shared layer base ─────────────────────────────── */
+.mbr-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* FX layers use screen blending so they light up whatever is behind */
+.mbr-fx {
+  mix-blend-mode: screen;
+}
+
+/* ── idle (no animation running) ───────────────────── */
+.mbr-scene:not(.mbr-playing) .mbr-shadow        { opacity: 0.35; }
+.mbr-scene:not(.mbr-playing) .mbr-bag-closed    { opacity: 1; }
+.mbr-scene:not(.mbr-playing) .mbr-bag-open      { opacity: 0; }
+.mbr-scene:not(.mbr-playing) .mbr-sparkles-faint{ opacity: 0.15; }
+.mbr-scene:not(.mbr-playing) .mbr-portal        { opacity: 0; }
+.mbr-scene:not(.mbr-playing) .mbr-floor-glow    { opacity: 0; }
+.mbr-scene:not(.mbr-playing) .mbr-orb-purple    { opacity: 0; }
+.mbr-scene:not(.mbr-playing) .mbr-orb-gold      { opacity: 0; }
+.mbr-scene:not(.mbr-playing) .mbr-orb-white     { opacity: 0; }
+.mbr-scene:not(.mbr-playing) .mbr-rays-narrow   { opacity: 0; }
+.mbr-scene:not(.mbr-playing) .mbr-rays-wide     { opacity: 0; }
+.mbr-scene:not(.mbr-playing) .mbr-burst         { opacity: 0; }
+.mbr-scene:not(.mbr-playing) .mbr-card          { opacity: 0; transform: translateY(40%); }
+.mbr-scene:not(.mbr-playing) .mbr-frame-gold    { opacity: 0; }
+.mbr-scene:not(.mbr-playing) .mbr-sparkles-burst{ opacity: 0; }
+.mbr-scene:not(.mbr-playing) .mbr-sparkles-stars{ opacity: 0; }
+
+/* ── playing state — all keyframes fire together ───── */
+
+.mbr-playing .mbr-shadow {
+  animation: mbr-shadow-in 0.4s ease-out both;
+}
+@keyframes mbr-shadow-in {
+  from { opacity: 0; transform: scaleX(0.3); }
+  to   { opacity: 0.5; transform: scaleX(1); }
+}
+
+.mbr-playing .mbr-sparkles-faint {
+  animation: mbr-sparkles-faint-anim 4s ease-in-out both;
+}
+@keyframes mbr-sparkles-faint-anim {
+  0%   { opacity: 0; }
+  10%  { opacity: 0.5; }
+  80%  { opacity: 0.4; }
+  100% { opacity: 0.2; }
+}
+
+.mbr-playing .mbr-bag-closed {
+  animation: mbr-bag-closed-anim 1.2s ease-in-out both;
+}
+@keyframes mbr-bag-closed-anim {
+  0%   { opacity: 1; transform: scale(1) translateY(0); }
+  50%  { opacity: 1; transform: scale(1.04) translateY(-2%); }
+  85%  { opacity: 0; transform: scale(0.9) translateY(5%); }
+  100% { opacity: 0; }
+}
+
+.mbr-playing .mbr-portal {
+  animation: mbr-portal-anim 2.5s ease-in-out both;
+  animation-delay: 0.3s;
+}
+@keyframes mbr-portal-anim {
+  0%   { opacity: 0; transform: scale(0.6); }
+  20%  { opacity: 0.7; transform: scale(1); }
+  70%  { opacity: 0.6; }
+  100% { opacity: 0; transform: scale(1.2); }
+}
+
+.mbr-playing .mbr-floor-glow {
+  animation: mbr-floor-anim 2s ease-in-out both;
+  animation-delay: 0.5s;
+}
+@keyframes mbr-floor-anim {
+  0%   { opacity: 0; }
+  20%  { opacity: 0.9; }
+  80%  { opacity: 0.6; }
+  100% { opacity: 0; }
+}
+
+.mbr-playing .mbr-bag-open {
+  animation: mbr-bag-open-anim 2.8s ease-in-out both;
+  animation-delay: 0.8s;
+}
+@keyframes mbr-bag-open-anim {
+  0%   { opacity: 0; transform: scale(0.95) translateY(3%); }
+  15%  { opacity: 1; transform: scale(1) translateY(0); }
+  70%  { opacity: 1; }
+  90%  { opacity: 0.3; transform: scale(0.9) translateY(6%); }
+  100% { opacity: 0; }
+}
+
+.mbr-playing .mbr-orb-purple {
+  animation: mbr-orb-pulse 1.2s ease-in-out both;
+  animation-delay: 1.0s;
+}
+@keyframes mbr-orb-pulse {
+  0%   { opacity: 0; transform: scale(0.5) translateY(10%); }
+  30%  { opacity: 0.8; transform: scale(1) translateY(0); }
+  70%  { opacity: 0.6; transform: scale(1.1); }
+  100% { opacity: 0; transform: scale(1.3); }
+}
+
+.mbr-playing .mbr-rays-narrow {
+  animation: mbr-rays-narrow-anim 1.0s ease-in-out both;
+  animation-delay: 1.2s;
+}
+@keyframes mbr-rays-narrow-anim {
+  0%   { opacity: 0; transform: scaleY(0.3) translateY(30%); }
+  25%  { opacity: 1; transform: scaleY(1) translateY(0); }
+  80%  { opacity: 0.7; }
+  100% { opacity: 0; transform: scaleY(1.2) translateY(-10%); }
+}
+
+.mbr-playing .mbr-orb-gold {
+  animation: mbr-orb-pulse 1.0s ease-in-out both;
+  animation-delay: 1.5s;
+}
+
+.mbr-playing .mbr-rays-wide {
+  animation: mbr-rays-wide-anim 1.2s ease-in-out both;
+  animation-delay: 1.6s;
+}
+@keyframes mbr-rays-wide-anim {
+  0%   { opacity: 0; transform: scaleX(0.4) translateY(20%); }
+  25%  { opacity: 0.9; transform: scaleX(1) translateY(0); }
+  80%  { opacity: 0.6; }
+  100% { opacity: 0; }
+}
+
+.mbr-playing .mbr-orb-white {
+  animation: mbr-orb-white-anim 0.8s ease-in-out both;
+  animation-delay: 1.9s;
+}
+@keyframes mbr-orb-white-anim {
+  0%   { opacity: 0; transform: scale(0.4); }
+  30%  { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 0; transform: scale(1.6); }
+}
+
+.mbr-playing .mbr-burst {
+  animation: mbr-burst-anim 0.9s ease-out both;
+  animation-delay: 2.1s;
+}
+@keyframes mbr-burst-anim {
+  0%   { opacity: 0; transform: scale(0.3); }
+  25%  { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 0; transform: scale(1.5); }
+}
+
+.mbr-playing .mbr-sparkles-burst {
+  animation: mbr-sparkles-burst-anim 1.2s ease-out both;
+  animation-delay: 2.1s;
+}
+@keyframes mbr-sparkles-burst-anim {
+  0%   { opacity: 0; transform: scale(0.5) translateY(15%); }
+  20%  { opacity: 0.9; transform: scale(1) translateY(0); }
+  100% { opacity: 0; transform: scale(1.3) translateY(-10%); }
+}
+
+.mbr-playing .mbr-card {
+  animation: mbr-card-rise 1.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  animation-delay: 2.2s;
+}
+@keyframes mbr-card-rise {
+  0%   { opacity: 0; transform: translateY(45%) scale(0.7) rotate(-3deg); }
+  30%  { opacity: 1; }
+  60%  { transform: translateY(0) scale(1.05) rotate(0.5deg); }
+  80%  { transform: translateY(0) scale(1) rotate(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1) rotate(0); }
+}
+
+.mbr-playing .mbr-frame-gold {
+  animation: mbr-frame-anim 1.2s ease-out both;
+  animation-delay: 2.6s;
+}
+@keyframes mbr-frame-anim {
+  0%   { opacity: 0; transform: scale(0.9); }
+  40%  { opacity: 0.8; transform: scale(1.02); }
+  100% { opacity: 0.6; transform: scale(1); }
+}
+
+.mbr-playing .mbr-sparkles-stars {
+  animation: mbr-sparkles-stars-anim 1.8s ease-in-out both;
+  animation-delay: 2.8s;
+}
+@keyframes mbr-sparkles-stars-anim {
+  0%   { opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 0.8; }
+  100% { opacity: 0.4; }
+}

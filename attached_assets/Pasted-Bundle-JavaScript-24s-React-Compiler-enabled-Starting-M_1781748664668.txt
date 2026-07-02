@@ -1,0 +1,40 @@
+Bundle JavaScript
+
+24s
+
+
+React Compiler enabled
+Starting Metro Bundler
+Android node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓░░░░░░░░░░░░░ 21.8% ( 76/240)
+Android node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓░░░░░░░░░ 44.2% (427/671)
+Android node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓░░░░░░░░░ 44.2% (463/729)
+Android node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓░░░░░░ 64.5% ( 783/1023)
+Android node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓░░░ 86.5% (1172/1333)
+Android node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 95.3% (1593/1672)
+Android Bundling failed 21464ms node_modules/.pnpm/expo-router@6.0.24_@types+react-dom@19.1.11_@types+react@19.1.17__@types+react@19.1.17__c289c0218f446f5969794daa94e36b65/node_modules/expo-router/entry.js (1809 modules)
+Error: Unable to resolve module @/assets/images/characters from /home/expo/workingdir/build/artifacts/ags-mobile/app/boss/[id].tsx: @/assets/images/characters could not be found within the project or in these directories:
+  node_modules
+  ../../node_modules
+  node_modules
+  ../../node_modules
+  10 | import { useSafeAreaInsets } from "react-native-safe-area-context";
+  11 |
+> 12 | import { BOSS_FULLS, BOSS_GUITARS, BOSS_GUITAR_CLOSEUPS } from "@/assets/images/characters";
+     |                                                                 ^
+  13 | import { ScreenBg } from "@/components/screen-bg";
+  14 | import { useBosses } from "@/contexts/bosses";
+  15 | import { useColors } from "@/hooks/useColors";
+Import stack:
+ artifacts/ags-mobile/app/boss/[id].tsx
+ | import "@/assets/images/characters"
+ artifacts/ags-mobile/app (require.context)
+pnpm expo export:embed --eager --platform android --dev false exited with non-zero code: 1
+
+Fail job
+
+1ms
+
+
+Build failed
+
+pnpm expo export:embed --eager --platform android --dev false exited with non-zero code: 1

@@ -1,0 +1,68 @@
+{
+  "expo": {
+    "name": "Alien Guitar Secrets",
+    "slug": "ags-mobile",
+    "version": "1.2.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "ags-mobile",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/logo-horizontal.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#050816"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "au.com.alienguitarsecrets.app",
+      "buildNumber": "5",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSMicrophoneUsageDescription": "Alien Guitar Secrets listens through your microphone so it can hear the notes you play and check whether they're correct."
+      }
+    },
+    "android": {
+      "package": "au.com.alienguitarsecrets.app",
+      "versionCode": 21,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#050816"
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/images/icon.png",
+      "baseUrl": "/mobile"
+    },
+    "plugins": [
+      [
+        "expo-router",
+        {
+          "origin": "https://replit.com/"
+        }
+      ],
+      "expo-font",
+      "expo-web-browser",
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Alien Guitar Secrets listens through your microphone so it can hear the notes you play and check whether they're correct."
+        }
+      ],
+      "expo-asset"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "85e76ea8-338c-47e7-9793-8be66e59fe1f"
+      }
+    }
+  }
+}

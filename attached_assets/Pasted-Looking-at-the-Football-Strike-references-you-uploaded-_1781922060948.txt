@@ -1,0 +1,103 @@
+Looking at the Football Strike references you uploaded, they are not actually hinged like a real duffel bag.
+
+They use a bit of visual trickery:
+
+Closed State
+Bag is almost a rectangular cube rather than a cylinder.
+Perspective is a 3/4 top-down view (camera above and slightly in front).
+One long zipper runs along the top centreline.
+The zipper pull sits on one side (usually left).
+ ___________________
+/                   /
+|-------------------| ← zipper
+|                   |
+|                   |
+\___________________\
+Opening Animation
+
+When tapped:
+
+Zipper pull slides from left → right
+Entire top panel lifts upward from the centre seam.
+Front and rear edges stay rigid.
+Interior appears suddenly underneath.
+Lid opens around 70–90°.
+
+Think of it more like a treasure chest lid than a soft duffel bag.
+
+Closed
+
+ ___________
+|-----------| ← zip
+|           |
+|___________|
+
+
+Open
+
+      _______
+     /      /
+ ___/______/
+|           |
+|           |
+|___________|
+Why yours keeps looking wrong
+
+The AI keeps generating:
+
+soft cylindrical gym bags
+two-way zippers
+centre-opening lids
+floppy fabric
+
+Football Strike bags are actually:
+
+✅ Squarish boxes
+✅ Semi-rigid walls
+✅ Single zipper pull
+✅ Top lid opens as one piece
+✅ Overhead 3/4 perspective
+✅ Interior is a rectangular cavity
+
+For Fretboard Universe I'd build it like this:
+
+Shape
+
+Semi-rigid rectangular gear case
+Width ≈ 2.2× height
+Depth ≈ 1.1× height
+Slightly rounded corners
+
+Closed
+
+Single zipper pull on LEFT
+Gold piping
+Black ballistic nylon
+AGS logo centred
+
+Open Animation
+
+Zip pull moves left → right.
+Top panel rotates upward around rear edge.
+Lid reaches about 80°.
+Interior reveals glowing rewards:
+Picks
+XP orbs
+Straps
+Pedals
+Amps
+Guitar parts
+Legendary guitars
+
+I would actually make the bag behave like this:
+
+      _________
+     /        /|
+    /________/ |
+   |        |  |
+   | REWARD |  |
+   |________| /
+
+Almost like a premium sci-fi loot chest disguised as a gear bag.
+
+For Fretboard Universe, I'd lean even harder into that idea because opening the bag needs to feel like opening a legendary drop in a game, not just unzipping a sports bag.

@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/precision-labs/"
+title = "AGS Precision Labs"
+version = "1.0.0"
+id = "artifacts/ags-precision-labs"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/precision-labs/" ]
+localPort = 21257
+
+[services.development]
+run = "pnpm --filter @workspace/ags-precision-labs run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ags-precision-labs", "run", "build" ]
+publicDir = "artifacts/ags-precision-labs/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21257"
+BASE_PATH = "/precision-labs/"

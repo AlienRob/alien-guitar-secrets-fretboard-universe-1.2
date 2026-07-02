@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "f8fb970a-426d-476c-9944-0b2fbab0af33"
+      }
+    },
+    "android": {
+      "package": "au.com.alienguitarsecrets.app"
+    }
+  }
+}

@@ -1,0 +1,225 @@
+// ios/App/App/NativeMetronome.swift
+
+import Foundation
+import AVFoundation
+
+@objc public class NativeMetronome: NSObject {
+    private let engine = AVAudioEngine()
+    private let player = AVAudioPlayerNode()
+
+    private var bpm: Double = 120
+    private var beatsPerBar: Int = 4
+    private var subdivision: Int = 1
+    private var accentFirstBeat: Bool = true
+
+    private let sampleRate: Double = 44100.0
+
+    private var visualTimer: DispatchSourceTimer?
+    private var visualBeatIndex: Int = 0
+    private var onBeat: ((Int) -> Void)?
+
+    @objc public func setBeatCallback(_ callback: @escaping (Int) -> Void) {
+        self.onBeat = callback
+    }
+
+    @objc public func start(
+        bpm: Double,
+        beatsPerBar: Int,
+        subdivision: Int,
+        accentFirstBeat: Bool
+    ) throws {
+        self.bpm = max(30, min(bpm, 300))
+        self.beatsPerBar = max(1, min(beatsPerBar, 12))
+        self.subdivision = max(1, min(subdivision, 4))
+        self.accentFirstBeat = accentFirstBeat
+
+        try configureAudioSession()
+        try configureEngine()
+
+        let buffer = buildBarBuffer()
+
+        player.stop()
+        player.scheduleBuffer(buffer, at: nil, options: [.loops], completionHandler: nil)
+
+        if !engine.isRunning {
+            try engine.start()
+        }
+
+        player.play()
+        startVisualBeatTimer()
+    }
+
+    @objc public func stop() {
+        visualTimer?.cancel()
+        visualTimer = nil
+
+        player.stop()
+        engine.pause()
+
+        DispatchQueue.main.async {
+            self.onBeat?(0)
+        }
+    }
+
+    @objc public func setTempo(_ bpm: Double) throws {
+        let wasPlaying = player.isPlaying
+        self.bpm = max(30, min(bpm, 300))
+
+        if wasPlaying {
+            try start(
+                bpm: self.bpm,
+                beatsPerBar: self.beatsPerBar,
+                subdivision: self.subdivision,
+                accentFirstBeat: self.accentFirstBeat
+            )
+        }
+    }
+
+    private func configureAudioSession() throws {
+        let session = AVAudioSession.sharedInstance()
+
+        try session.setCategory(
+            .playback,
+            mode: .default,
+            options: [.mixWithOthers]
+        )
+
+        try session.setActive(true)
+    }
+
+    private func configureEngine() throws {
+        if !engine.attachedNodes.contains(player) {
+            engine.attach(player)
+        }
+
+        let format = AVAudioFormat(
+            standardFormatWithSampleRate: sampleRate,
+            channels: 1
+        )!
+
+        engine.connect(player, to: engine.mainMixerNode, format: format)
+        engine.prepare()
+    }
+
+    private func buildBarBuffer() -> AVAudioPCMBuffer {
+        let format = AVAudioFormat(
+            standardFormatWithSampleRate: sampleRate,
+            channels: 1
+        )!
+
+        let secondsPerBeat = 60.0 / bpm
+        let secondsPerSubdivision = secondsPerBeat / Double(subdivision)
+
+        let totalPulses = beatsPerBar * subdivision
+        let totalSeconds = secondsPerBeat * Double(beatsPerBar)
+        let totalFrames = AVAudioFrameCount(totalSeconds * sampleRate)
+
+        let buffer = AVAudioPCMBuffer(
+            pcmFormat: format,
+            frameCapacity: totalFrames
+        )!
+
+        buffer.frameLength = totalFrames
+
+        guard let channel = buffer.floatChannelData?[0] else {
+            return buffer
+        }
+
+        for i in 0..<Int(totalFrames) {
+            channel[i] = 0.0
+        }
+
+        for pulse in 0..<totalPulses {
+            let beatIndex = pulse / subdivision
+            let subdivisionIndex = pulse % subdivision
+
+            let time = Double(pulse) * secondsPerSubdivision
+            let startFrame = Int(time * sampleRate)
+
+            let isDownbeat = beatIndex == 0 && subdivisionIndex == 0
+            let isMainBeat = subdivisionIndex == 0
+
+            if isDownbeat && accentFirstBeat {
+                addClick(
+                    to: channel,
+                    startFrame: startFrame,
+                    totalFrames: Int(totalFrames),
+                    frequency: 1800,
+                    gain: 0.9,
+                    durationMs: 36
+                )
+            } else if isMainBeat {
+                addClick(
+                    to: channel,
+                    startFrame: startFrame,
+                    totalFrames: Int(totalFrames),
+                    frequency: 1200,
+                    gain: 0.62,
+                    durationMs: 30
+                )
+            } else {
+                addClick(
+                    to: channel,
+                    startFrame: startFrame,
+                    totalFrames: Int(totalFrames),
+                    frequency: 850,
+                    gain: 0.34,
+                    durationMs: 22
+                )
+            }
+        }
+
+        return buffer
+    }
+
+    private func addClick(
+        to samples: UnsafeMutablePointer<Float>,
+        startFrame: Int,
+        totalFrames: Int,
+        frequency: Double,
+        gain: Double,
+        durationMs: Double
+    ) {
+        let clickFrames = Int((durationMs / 1000.0) * sampleRate)
+
+        for i in 0..<clickFrames {
+            let frame = startFrame + i
+
+            if frame >= totalFrames {
+                break
+            }
+
+            let t = Double(i) / sampleRate
+            let envelope = exp(-t * 120.0)
+            let sine = sin(2.0 * Double.pi * frequency * t)
+            let transient = sin(2.0 * Double.pi * frequency * 2.0 * t) * 0.35
+
+            let value = (sine + transient) * envelope * gain
+            samples[frame] = max(-1.0, min(1.0, samples[frame] + Float(value)))
+        }
+    }
+
+    private func startVisualBeatTimer() {
+        visualTimer?.cancel()
+        visualBeatIndex = 0
+
+        let interval = 60.0 / bpm
+        let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.main)
+
+        timer.schedule(
+            deadline: .now(),
+            repeating: interval,
+            leeway: .milliseconds(8)
+        )
+
+        timer.setEventHandler { [weak self] in
+            guard let self = self else { return }
+
+            self.onBeat?(self.visualBeatIndex)
+            self.visualBeatIndex = (self.visualBeatIndex + 1) % self.beatsPerBar
+        }
+
+        visualTimer = timer
+        timer.resume()
+    }
+}

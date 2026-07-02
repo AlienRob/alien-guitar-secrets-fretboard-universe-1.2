@@ -1,0 +1,44 @@
+{
+  "name": "AGS Mystery Bag Premium Reveal - Batch 6",
+  "type": "transparent_png_animation_sequence",
+  "background": "none / transparent",
+  "canvas_width": 1024,
+  "canvas_height": 1536,
+  "fps": 24,
+  "frame_count": 96,
+  "duration_seconds": 4.0,
+  "frames": "frame_0000.png through frame_0095.png",
+  "phases": [
+    {
+      "frames": "0000-0011",
+      "phase": "closed bag idle"
+    },
+    {
+      "frames": "0012-0023",
+      "phase": "tap / shake"
+    },
+    {
+      "frames": "0024-0035",
+      "phase": "open bag begins"
+    },
+    {
+      "frames": "0036-0053",
+      "phase": "light explosion"
+    },
+    {
+      "frames": "0054-0071",
+      "phase": "card rises"
+    },
+    {
+      "frames": "0072-0087",
+      "phase": "card flip"
+    },
+    {
+      "frames": "0088-0095",
+      "phase": "gold rarity final hold"
+    }
+  ],
+  "split_number": 5,
+  "split_range": "frame_0048.png through frame_0059.png",
+  "total_splits": 8
+}

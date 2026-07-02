@@ -1,0 +1,321 @@
+The biggest mistake guitar apps make is turning everything into a quiz.
+
+Nobody wakes up thinking:
+
+"I can't wait to answer note flashcards today."
+
+People come back because they're playing a game, getting rewards, and improving without realising it.
+
+🎯 Note Game – "Galactic Note Hunt"
+Core Idea
+
+The fretboard is dark.
+
+A mission appears:
+
+"The planet is powered by G notes."
+
+All G notes begin hidden around the neck.
+
+Player has:
+
+⏱️ 30 seconds
+
+Tap every G.
+
+Make it fun
+
+✅ Correct note explodes into purple energy.
+
+✅ Combo meter:
+
+3 in a row = x2
+
+6 in a row = x3
+
+12 in a row = Cosmic Mode
+
+✅ Wrong note:
+
+-3 seconds
+
+Combo resets.
+
+Variations
+Asteroid Mode
+
+Notes fall onto the fretboard.
+
+Tap only the requested notes.
+
+Example:
+
+Destroy:
+
+A notes
+
+Avoid:
+
+Everything else.
+
+Like Guitar Hero meets Space Invaders.
+
+Fog of War
+
+Only part of the fretboard is visible.
+
+As notes are found:
+
+More of the neck reveals.
+
+Creates exploration.
+
+Survival Mode
+
+No timer.
+
+One mistake = game over.
+
+How many notes can you find?
+
+Perfect for leaderboards.
+
+🎸 Chord Game – "Chord Forge"
+
+Building chords is far more engaging than identifying them.
+
+Mission
+
+Zashtar says:
+
+"Construct E Minor."
+
+Player must place:
+
+E
+G
+B
+
+onto the fretboard.
+
+When complete:
+
+The notes connect with energy beams.
+
+The chord begins rotating.
+
+The guitar strums itself.
+
+Reward.
+
+Progressive Difficulty
+Level 1
+
+Build:
+
+Major
+
+Minor
+
+Level 2
+
+Build:
+
+7
+
+Maj7
+
+m7
+
+Level 3
+
+Build:
+
+sus2
+
+sus4
+
+6
+
+9
+
+Level 4
+
+Extended chords.
+
+Make chords feel like crafting
+
+Every correct note:
+
+⭐ Charges the forge.
+
+Complete chord:
+
+🔥 Chord ignites.
+
+Avatar receives:
+
+XP
+Picks
+Guitar fragments
+
+Battle Version
+
+Enemy shield:
+
+C Major
+
+You must construct:
+
+C
+E
+G
+
+before timer ends.
+
+Correct chord:
+
+Shield breaks.
+
+Attack animation.
+
+🪐 Scale Game – "Scale Constellations"
+
+This could become your signature game.
+
+The fretboard is a night sky.
+
+Player receives:
+
+"Create A Minor Pentatonic."
+
+Every correct note becomes a star.
+
+As notes are discovered:
+
+Constellations form.
+
+When complete:
+
+The stars connect.
+
+The whole pattern glows.
+
+A cosmic guitar chord rings out.
+
+Extremely satisfying.
+
+Different Scale Modes
+Pattern Builder
+
+Build scale notes anywhere.
+
+Path Finder
+
+Start:
+
+5th fret Low E.
+
+Navigate through the scale to:
+
+17th fret High E.
+
+Cannot touch wrong notes.
+
+Like a maze.
+
+Speed Climb
+
+Scale notes appear.
+
+Tap in order:
+
+1
+2
+b3
+4
+5
+b7
+
+Beat the clock.
+
+Scale Runner
+
+Avatar runs across frets.
+
+Only stepping on scale notes keeps moving.
+
+Wrong note:
+
+Character falls into space.
+
+Kids will love this.
+
+Boss Version
+
+Guardian:
+
+Vairon – Architect of Sound
+
+Challenge:
+
+"Build the Dorian Scale."
+
+Every correct note weakens him.
+
+Wrong notes restore his health.
+
+When completed:
+
+Massive cosmic explosion.
+
+🔥 My favourite idea for Fretboard Universe
+Planet Restoration
+
+Each planet has lost its musical energy.
+
+To restore it:
+
+Planet 1
+
+Find notes.
+
+Planet 2
+
+Build chords.
+
+Planet 3
+
+Construct scales.
+
+Planet 4
+
+Navigate intervals.
+
+Planet 5
+
+Boss battle.
+
+Every completed challenge physically changes the planet:
+
+Dead grey world
+↓
+
+Plants grow
+↓
+
+Water appears
+↓
+
+Sky turns purple
+↓
+
+Music returns
+
+Now players aren't just memorising notes, chords and scales.
+
+They're on a mission:
+
+Learn the fretboard to restore music to the universe.
+
+That gives every exercise meaning beyond simply answering questions.

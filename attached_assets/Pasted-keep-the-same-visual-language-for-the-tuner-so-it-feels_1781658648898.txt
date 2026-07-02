@@ -1,0 +1,336 @@
+keep the same visual language for the tuner so it feels like it belongs inside Fretboard Universe.
+
+Design Direction
+
+Think:
+
+Soundbrenner × GuitarTuna × Alien Guitar Secrets
+
+The tuner should feel like you're preparing your instrument before entering battle.
+
+AGS Galactic Tuner
+Visual Language
+Same deep navy cosmic background
+Subtle stars and particles
+Same rounded glass panels
+Same neon accent colours:
+🔴 Red
+🟠 Orange
+🟡 Yellow
+🟢 Green
+🔵 Cyan
+🟣 Purple
+🩷 Pink
+Soft outer glow on active selections
+Same typography as metronome
+Same bottom navigation
+Same premium minimal aesthetic
+Layout
+Top
+
+AGS logo
+
+Instrument Selector
+
+Large swipeable cards:
+
+🎸 Guitar
+🎸 7-String Guitar
+🎸 8-String Guitar
+🎸 Bass
+🎸 5-String Bass
+🎸 Ukulele
+
+Active card glows in selected chakra colour.
+
+Headstock Display
+
+Instead of plain letters:
+
+Display realistic vector headstocks similar to GuitarTuna.
+
+When selected:
+
+Guitar
+E A D G B E
+7 String
+B E A D G B E
+8 String
+F# B E A D G B E
+Bass
+E A D G
+5 String Bass
+B E A D G
+Ukulele
+G C E A
+
+Strings glow individually:
+
+Grey → listening
+
+Orange → sharp
+
+Red → flat
+
+Green → in tune
+
+Main Tuner Display
+
+Large centre section:
+
+        E
+      +8¢
+
+◄────────●────────►
+
+       PERFECT
+
+or
+
+        E
+        ✓
+
+The indicator should animate smoothly.
+
+When perfectly in tune:
+
+note glows
+pulse ring expands
+small particle burst
+gentle haptic feedback
+Circular Dial
+
+Reuse your metronome wheel.
+
+Instead of BPM:
+
+Outer ring becomes:
+
+-50¢  -40¢  -30¢ .... 0 .... +30¢ +40¢ +50¢
+
+Needle rotates around the ring.
+
+This instantly makes the tuner feel like it belongs beside the metronome.
+
+Quick Controls
+Reference Frequency
+
+Cards:
+
+432 Hz
+435 Hz
+438 Hz
+440 Hz
+442 Hz
+444 Hz
+
+Selected card glows.
+
+Tuning Library
+
+Cards:
+
+Standard
+
+1/2 Step Down
+
+Full Step Down
+
+Drop D
+
+Drop C
+
+Drop B
+
+Open G
+
+Open D
+
+DADGAD
+
+Nashville
+
+CGCGCE
+
+FACGCE
+
+Baritone
+
+Custom
+
+Selecting one automatically updates headstock tuners.
+
+Song Library
+
+This would be brilliant.
+
+Cards:
+
+Song Title
+
+Artist
+
+Instrument
+
+Tuning
+
+Reference Pitch
+
+Example:
+
+Master of Puppets
+Metallica
+Guitar
+Standard E
+440 Hz
+
+The End
+The Doors
+Guitar
+D Standard
+440 Hz
+
+Kashmir
+Led Zeppelin
+DADGAD
+440 Hz
+
+Scar Tissue
+Red Hot Chili Peppers
+Standard
+440 Hz
+
+Tool songs
+
+7 String
+
+Drop B
+
+440 Hz
+
+If a song uses unusual reference pitch:
+
+Song Name
+Artist
+Open D
+432 Hz
+
+Then:
+
+TUNE TO SONG
+
+button
+
+The tuner automatically configures itself.
+
+Gamification
+
+I would absolutely tie this into Fretboard Universe.
+
+Before every practice:
+
+Zashtar:
+"Alien Guitarist... your weapon is unstable. Tune before entering the portal."
+
+Tune all strings:
+
+✅ Instrument Tuned
+
++10 XP
+
++1 Precision Point
+
+3-day tuning streak:
+
+🏆 Galactic Ear Medal
+
+Master Prompt
+
+Create an AGS Galactic Tuner screen for Fretboard Universe.
+
+Style:
+
+Same visual language as AGS Chrono Metronome
+Premium mobile app UI
+Deep navy cosmic background with subtle stars
+Soft glassmorphism cards
+Rounded corners
+Neon glow accents
+Chakra-inspired colour themes (red, orange, yellow, green, cyan, purple, pink)
+Minimal and futuristic
+Soundbrenner-inspired simplicity
+GuitarTuna-inspired instrument visuals
+AAA premium mobile game interface
+
+Layout:
+
+Top:
+
+Alien Guitar Secrets logo
+
+Instrument selector:
+
+Swipeable cards for Guitar, 7-String Guitar, 8-String Guitar, Bass, 5-String Bass and Ukulele
+Selected card glows
+
+Headstock section:
+
+Realistic vector headstock illustrations
+Individual tuning pegs
+Strings display note names
+String status colours:
+Grey = listening
+Orange = sharp
+Red = flat
+Green = in tune
+
+Main tuner:
+
+Large central note display
+Animated cents indicator
+Circular tuning ring styled like the AGS metronome wheel
+Needle rotates smoothly
+Green pulse animation when perfectly tuned
+Subtle particles and haptic feedback
+
+Controls:
+
+Reference frequencies:
+432 Hz
+435 Hz
+438 Hz
+440 Hz
+442 Hz
+444 Hz
+
+Tuning library:
+Standard
+1/2 Step Down
+Full Step Down
+Drop D
+Drop C
+Drop B
+Open G
+Open D
+DADGAD
+Nashville
+Baritone
+Custom
+
+Song Library:
+
+Search bar
+Song cards displaying:
+Song Name
+Artist
+Instrument
+Tuning
+Reference Pitch
+One-tap "Tune to Song" button
+
+Gamification:
+
+Message: "Tune your weapon before entering the portal."
+XP reward after tuning all strings
+Precision streak achievements
+Fits seamlessly within Fretboard Universe and AGS Chrono Metronome design language.

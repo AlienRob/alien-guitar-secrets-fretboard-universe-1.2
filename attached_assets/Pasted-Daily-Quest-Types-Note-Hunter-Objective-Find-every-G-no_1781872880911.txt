@@ -1,0 +1,296 @@
+Daily Quest Types
+🎯 Note Hunter
+
+Objective:
+Find every G note.
+
+Timer: 45 seconds
+
+Reward:
+
+50 XP
+20 Picks
+Chance of Mystery Gear Bag
+
+Example:
+
+"Zashtar requires all G notes to power the Galactic Gateway."
+
+Player taps every G on the fretboard.
+
+Wrong notes:
+
+❌ -3 seconds
+
+⚡ Interval Warp
+
+Root appears.
+
+Example:
+
+ROOT = C
+
+Mission:
+
+Find:
+
+Major 3rd
+Perfect 5th
+Minor 7th
+
+Timer:
+
+60 seconds.
+
+Every correct answer:
+
++2 second combo bonus.
+
+🚀 Octave Rescue
+
+One note glows.
+
+Example:
+
+8th fret Low E.
+
+Mission:
+
+Find ALL octave locations.
+
+Uses your Five Formulas.
+
+Timer:
+
+30 seconds.
+
+Perfect score:
+
+⭐ Cosmic Bonus
+
+This reinforces AGS systems beautifully.
+
+🌌 Scale Constellation
+
+"Construct A Minor Pentatonic."
+
+Player taps notes.
+
+Every correct note:
+
+⭐ Star lights up.
+
+Complete pattern:
+
+Constellation forms.
+
+Reward:
+
+XP
+Guitar fragments
+Avatar cosmetics
+
+⚡ Chord Forge
+
+Mission:
+
+Build:
+
+Major
+Minor
+Dominant 7
+Sus4
+
+Example:
+
+Build D Major.
+
+Player taps:
+
+D
+F#
+A
+
+Wrong notes:
+
+Meteor strikes the timer.
+
+🎵 Ear Hunter
+
+Audio plays:
+
+Root + interval.
+
+Player must find interval on fretboard.
+
+This becomes incredibly addictive.
+
+Reward multiplier:
+
+x2 XP.
+
+🛸 Alien Invasion
+
+Notes start appearing.
+
+Tap them before they disappear.
+
+Like Guitar Hero meets Whack-A-Mole.
+
+Combo Meter:
+
+x2
+x3
+x5
+
+💎 Treasure Hunt
+
+"Find the hidden notes that unlock the Ancient Guitar Vault."
+
+Some notes contain:
+
+Picks
+XP
+Rare pedals
+Avatar items
+Guitar pieces
+
+Creates surprise and dopamine.
+
+Daily Quest Categories
+Monday
+
+Natural Note Mission
+
+Tuesday
+
+Intervals
+
+Wednesday
+
+Scales
+
+Thursday
+
+Chords
+
+Friday
+
+Speed Round
+
+Saturday
+
+Boss Prep
+
+Sunday
+
+Mystery Planet
+
+Players start anticipating the next day's challenge.
+
+Time Rewards
+
+⭐ Under 30 sec = Gold Medal
+⭐⭐ Under 20 sec = Platinum Medal
+⭐⭐⭐ Under 15 sec = Galactic Medal
+
+Extra rewards:
+
+More XP
+More Picks
+Higher rarity bags
+Streak Multipliers
+
+1 Day = x1 XP
+
+3 Days = x1.2 XP
+
+7 Days = x1.5 XP
+
+14 Days = x2 XP
+
+30 Days = x3 XP
+
+Mystery Gear Bags
+
+Every Daily Quest grants:
+
+Common Bag
+
+Picks
+XP
+Coins
+
+Rare Bag
+
+Pedals
+Amp Skins
+Avatar Clothing
+
+Epic Bag
+
+Signature Guitar Parts
+
+Legendary Bag
+
+Complete Guardian Guitar
+Exclusive Cosmetics
+Portal Effects
+
+The Magic Formula
+
+Quest
+↓
+
+Beat Timer
+↓
+
+Earn Rewards
+↓
+
+Maintain Streak
+↓
+
+Unlock Gear
+↓
+
+Become Stronger
+↓
+
+Fight Guardian Boss
+
+Example Daily Session
+
+ZASHTAR'S DAILY QUEST
+
+🟣 Find all F notes
+Reward: 50 XP
+
+🟣 Build A Minor Pentatonic
+Reward: 80 XP
+
+🟣 Find all C Octaves using the Five Formulas
+Reward: 120 XP
+
+🟣 Bonus Challenge:
+Complete everything in under 2 minutes.
+
+Reward:
+
+🎸 Epic Mystery Gear Bag
+
+My favourite mechanic for Fretboard Universe
+Cosmic Chain
+
+Every correct note increases a multiplier:
+
+⭐ x1
+⭐⭐ x2
+⭐⭐⭐ x3
+⭐⭐⭐⭐ x5
+
+One mistake resets the chain.
+
+When players hit x5, the fretboard starts glowing purple, particles appear, and Zashtar says:
+
+"Your awareness expands, Alien Guitarist..."

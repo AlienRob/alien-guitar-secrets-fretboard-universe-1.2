@@ -1,0 +1,83 @@
+import { useMemo, useState } from "react";
+import { createMetronomeEngine } from "./metronomeEngine";
+
+export default function YourExistingMetronome() {
+  const metronomeEngine = useMemo(() => createMetronomeEngine(), []);
+
+  const [bpm, setBpm] = useState(120);
+  const [beatsPerBar, setBeatsPerBar] = useState(4);
+  const [subdivision, setSubdivision] = useState(1);
+  const [running, setRunning] = useState(false);
+  const [currentBeat, setCurrentBeat] = useState(0);
+
+  metronomeEngine.onBeat((beatIndex) => {
+    setCurrentBeat(beatIndex);
+
+    // Keep your existing branding/animation logic here:
+    // flashOrb()
+    // pulseCrystal()
+    // lightUpBeatDot()
+    // triggerYourExistingVisualEffect()
+  });
+
+  async function handleStartStop() {
+    if (running) {
+      await metronomeEngine.stop();
+      setRunning(false);
+      setCurrentBeat(0);
+      return;
+    }
+
+    await metronomeEngine.start({
+      bpm,
+      beatsPerBar,
+      subdivision,
+      accentFirstBeat: true,
+    });
+
+    setRunning(true);
+  }
+
+  async function handleTempoChange(nextBpm: number) {
+    const safeBpm = Math.max(30, Math.min(300, nextBpm));
+
+    setBpm(safeBpm);
+
+    if (running) {
+      await metronomeEngine.setTempo(safeBpm);
+    }
+  }
+
+  return (
+    <div className="YOUR-CURRENT-METRONOME-BRANDING">
+      {/* Keep your existing UI here */}
+
+      <div className="bpm-display">{bpm}</div>
+
+      <div className="beat-dots">
+        {Array.from({ length: beatsPerBar }).map((_, index) => (
+          <div
+            key={index}
+            className={
+              index === currentBeat
+                ? "beat-dot beat-dot-active"
+                : "beat-dot"
+            }
+          />
+        ))}
+      </div>
+
+      <button onClick={handleStartStop}>
+        {running ? "Stop" : "Start"}
+      </button>
+
+      <input
+        type="range"
+        min="30"
+        max="300"
+        value={bpm}
+        onChange={(event) => handleTempoChange(Number(event.target.value))}
+      />
+    </div>
+  );
+}

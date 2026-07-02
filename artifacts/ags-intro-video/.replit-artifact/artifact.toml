@@ -1,0 +1,10 @@
+kind = "video"
+previewPath = "/ags-intro-video/"
+title = "AGS Intro Video (archived)"
+version = "1.0.0"
+id = "artifacts/ags-intro-video"
+router = "path"
+
+[[integratedSkills]]
+name = "video-js"
+version = "1.0.0"

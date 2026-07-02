@@ -1,0 +1,353 @@
+{
+  "app": "Fretboard Universe",
+  "system": "Avatar Wardrobe / Skins",
+  "version": "1.0 MVP",
+  "layerOrder": [
+    {
+      "layer": 10,
+      "name": "base_avatar"
+    },
+    {
+      "layer": 20,
+      "name": "pants"
+    },
+    {
+      "layer": 30,
+      "name": "boots"
+    },
+    {
+      "layer": 40,
+      "name": "top"
+    },
+    {
+      "layer": 50,
+      "name": "jacket"
+    },
+    {
+      "layer": 60,
+      "name": "hair"
+    },
+    {
+      "layer": 70,
+      "name": "headwear"
+    },
+    {
+      "layer": 80,
+      "name": "accessories"
+    },
+    {
+      "layer": 90,
+      "name": "special_effects"
+    }
+  ],
+  "categories": [
+    "base_avatar",
+    "hair",
+    "headwear",
+    "top",
+    "jacket",
+    "pants",
+    "boots",
+    "accessory",
+    "special_effect"
+  ],
+  "rarities": [
+    "common",
+    "rare",
+    "epic",
+    "legendary",
+    "mythic"
+  ],
+  "items": [
+    {
+      "id": "hair_long_rocker",
+      "name": "Long Rocker Hair",
+      "category": "hair",
+      "layer": 60,
+      "rarity": "common",
+      "gender": "unisex",
+      "unlock": "starter",
+      "asset": "hair_long_rocker.png"
+    },
+    {
+      "id": "hair_viking_braids",
+      "name": "Viking Braids",
+      "category": "hair",
+      "layer": 60,
+      "rarity": "epic",
+      "gender": "unisex",
+      "unlock": "solar_system_5",
+      "asset": "hair_viking_braids.png"
+    },
+    {
+      "id": "hair_space_mohawk",
+      "name": "Space Mohawk",
+      "category": "hair",
+      "layer": 60,
+      "rarity": "rare",
+      "gender": "unisex",
+      "unlock": "solar_system_2",
+      "asset": "hair_space_mohawk.png"
+    },
+    {
+      "id": "hair_curly_rockstar",
+      "name": "Curly Rockstar Hair",
+      "category": "hair",
+      "layer": 60,
+      "rarity": "common",
+      "gender": "unisex",
+      "unlock": "starter",
+      "asset": "hair_curly_rockstar.png"
+    },
+    {
+      "id": "headwear_ags_headband",
+      "name": "AGS Purple Headband",
+      "category": "headwear",
+      "layer": 70,
+      "rarity": "rare",
+      "gender": "unisex",
+      "unlock": "solar_system_2",
+      "asset": "headwear_ags_headband.png"
+    },
+    {
+      "id": "headwear_cosmic_bandana",
+      "name": "Cosmic Bandana",
+      "category": "headwear",
+      "layer": 70,
+      "rarity": "rare",
+      "gender": "unisex",
+      "unlock": "solar_system_2",
+      "asset": "headwear_cosmic_bandana.png"
+    },
+    {
+      "id": "headwear_alien_crown",
+      "name": "Alien Crown",
+      "category": "headwear",
+      "layer": 70,
+      "rarity": "legendary",
+      "gender": "unisex",
+      "unlock": "boss_reward",
+      "asset": "headwear_alien_crown.png"
+    },
+    {
+      "id": "headwear_shred_visor",
+      "name": "Shred Visor",
+      "category": "headwear",
+      "layer": 75,
+      "rarity": "epic",
+      "gender": "unisex",
+      "unlock": "solar_system_4",
+      "asset": "headwear_shred_visor.png"
+    },
+    {
+      "id": "top_black_ags_tshirt",
+      "name": "Black AGS T-Shirt",
+      "category": "top",
+      "layer": 40,
+      "rarity": "common",
+      "gender": "unisex",
+      "unlock": "starter",
+      "asset": "top_black_ags_tshirt.png"
+    },
+    {
+      "id": "top_purple_ags_tshirt",
+      "name": "Purple AGS T-Shirt",
+      "category": "top",
+      "layer": 40,
+      "rarity": "common",
+      "gender": "unisex",
+      "unlock": "starter",
+      "asset": "top_purple_ags_tshirt.png"
+    },
+    {
+      "id": "top_silk_stage_shirt",
+      "name": "Silk Stage Shirt",
+      "category": "top",
+      "layer": 40,
+      "rarity": "rare",
+      "gender": "unisex",
+      "unlock": "solar_system_3",
+      "asset": "top_silk_stage_shirt.png"
+    },
+    {
+      "id": "top_guardian_armour",
+      "name": "Guardian Armour Top",
+      "category": "top",
+      "layer": 40,
+      "rarity": "legendary",
+      "gender": "unisex",
+      "unlock": "boss_reward",
+      "asset": "top_guardian_armour.png"
+    },
+    {
+      "id": "jacket_black_leather",
+      "name": "Black Leather Jacket",
+      "category": "jacket",
+      "layer": 50,
+      "rarity": "rare",
+      "gender": "unisex",
+      "unlock": "solar_system_2",
+      "asset": "jacket_black_leather.png"
+    },
+    {
+      "id": "jacket_purple_leather",
+      "name": "Purple Leather Jacket",
+      "category": "jacket",
+      "layer": 50,
+      "rarity": "rare",
+      "gender": "unisex",
+      "unlock": "solar_system_2",
+      "asset": "jacket_purple_leather.png"
+    },
+    {
+      "id": "jacket_cosmic_explorer",
+      "name": "Cosmic Explorer Jacket",
+      "category": "jacket",
+      "layer": 50,
+      "rarity": "epic",
+      "gender": "unisex",
+      "unlock": "solar_system_4",
+      "asset": "jacket_cosmic_explorer.png"
+    },
+    {
+      "id": "jacket_hall_of_legends",
+      "name": "Hall of Legends Coat",
+      "category": "jacket",
+      "layer": 50,
+      "rarity": "mythic",
+      "gender": "unisex",
+      "unlock": "hall_of_legends",
+      "asset": "jacket_hall_of_legends.png"
+    },
+    {
+      "id": "pants_black_jeans",
+      "name": "Black Jeans",
+      "category": "pants",
+      "layer": 20,
+      "rarity": "common",
+      "gender": "unisex",
+      "unlock": "starter",
+      "asset": "pants_black_jeans.png"
+    },
+    {
+      "id": "pants_ripped_black_jeans",
+      "name": "Ripped Black Jeans",
+      "category": "pants",
+      "layer": 20,
+      "rarity": "common",
+      "gender": "unisex",
+      "unlock": "starter",
+      "asset": "pants_ripped_black_jeans.png"
+    },
+    {
+      "id": "pants_leather",
+      "name": "Leather Pants",
+      "category": "pants",
+      "layer": 20,
+      "rarity": "rare",
+      "gender": "unisex",
+      "unlock": "solar_system_3",
+      "asset": "pants_leather.png"
+    },
+    {
+      "id": "pants_cosmic",
+      "name": "Cosmic Trousers",
+      "category": "pants",
+      "layer": 20,
+      "rarity": "epic",
+      "gender": "unisex",
+      "unlock": "solar_system_4",
+      "asset": "pants_cosmic.png"
+    },
+    {
+      "id": "boots_black_stage",
+      "name": "Black Stage Boots",
+      "category": "boots",
+      "layer": 30,
+      "rarity": "common",
+      "gender": "unisex",
+      "unlock": "starter",
+      "asset": "boots_black_stage.png"
+    },
+    {
+      "id": "boots_cosmic",
+      "name": "Cosmic Boots",
+      "category": "boots",
+      "layer": 30,
+      "rarity": "epic",
+      "gender": "unisex",
+      "unlock": "solar_system_4",
+      "asset": "boots_cosmic.png"
+    },
+    {
+      "id": "boots_guardian",
+      "name": "Guardian Boots",
+      "category": "boots",
+      "layer": 30,
+      "rarity": "legendary",
+      "gender": "unisex",
+      "unlock": "boss_reward",
+      "asset": "boots_guardian.png"
+    },
+    {
+      "id": "boots_gold_stage",
+      "name": "Gold Stage Boots",
+      "category": "boots",
+      "layer": 30,
+      "rarity": "mythic",
+      "gender": "unisex",
+      "unlock": "hall_of_legends",
+      "asset": "boots_gold_stage.png"
+    },
+    {
+      "id": "accessory_silver_chain",
+      "name": "Silver Chain",
+      "category": "accessory",
+      "layer": 80,
+      "rarity": "common",
+      "gender": "unisex",
+      "unlock": "starter",
+      "asset": "accessory_silver_chain.png"
+    },
+    {
+      "id": "accessory_ags_pendant",
+      "name": "AGS Pendant",
+      "category": "accessory",
+      "layer": 80,
+      "rarity": "rare",
+      "gender": "unisex",
+      "unlock": "solar_system_3",
+      "asset": "accessory_ags_pendant.png"
+    },
+    {
+      "id": "accessory_guitar_pick_necklace",
+      "name": "Guitar Pick Necklace",
+      "category": "accessory",
+      "layer": 80,
+      "rarity": "rare",
+      "gender": "unisex",
+      "unlock": "solar_system_3",
+      "asset": "accessory_guitar_pick_necklace.png"
+    },
+    {
+      "id": "accessory_hall_medal",
+      "name": "Hall of Legends Medal",
+      "category": "accessory",
+      "layer": 80,
+      "rarity": "mythic",
+      "gender": "unisex",
+      "unlock": "hall_of_legends",
+      "asset": "accessory_hall_medal.png"
+    }
+  ],
+  "defaultLoadout": {
+    "base_avatar": "avatar_base_human_male",
+    "hair": "hair_long_rocker",
+    "headwear": null,
+    "top": "top_black_ags_tshirt",
+    "jacket": null,
+    "pants": "pants_black_jeans",
+    "boots": "boots_black_stage",
+    "accessory": "accessory_silver_chain"
+  }
+}

@@ -1,0 +1,95 @@
+BUILD: Fretboard Universe Avatar Wardrobe / Skins System
+
+Create a wardrobe/customisation system for Fretboard Universe.
+
+GOAL
+Players can customise their avatar using layered transparent PNG assets:
+base avatar, hair, headwear, tops, jackets, pants, boots, accessories and future special effects.
+
+IMPORTANT
+Do not render a new full avatar for every outfit.
+Use layered PNGs stacked in a fixed order.
+
+LAYER ORDER
+10 base_avatar
+20 pants
+30 boots
+40 top
+50 jacket
+60 hair
+70 headwear
+80 accessories
+90 special_effects
+
+DATA
+Use /src/data/wardrobe_items.json as the item database.
+Each item includes:
+id, name, category, layer, rarity, gender, unlock, asset.
+
+ASSET PATH
+Store images in:
+/public/assets/wardrobe/
+
+Example:
+/public/assets/wardrobe/jacket_black_leather.png
+
+PLAYER PROFILE
+Add wardrobe inventory to player profile:
+
+wardrobe: {
+  unlockedItems: string[],
+  equipped: {
+    base_avatar: string,
+    hair: string | null,
+    headwear: string | null,
+    top: string | null,
+    jacket: string | null,
+    pants: string | null,
+    boots: string | null,
+    accessory: string | null,
+    special_effect: string | null
+  }
+}
+
+UI REQUIREMENTS
+Create a Wardrobe screen:
+- Avatar preview on top or left.
+- Category tabs: Hair, Headwear, Tops, Jackets, Pants, Boots, Accessories.
+- Item grid with item name, rarity, locked/unlocked state.
+- Equip button for unlocked items.
+- Locked items show unlock requirement.
+- Save outfit to player profile/local storage.
+- Preview updates instantly when an item is equipped.
+
+AVATAR PREVIEW
+Render equipped layers as absolutely positioned images inside a fixed container.
+All PNGs must align to the same avatar template size.
+Use z-index from the item layer value.
+
+UNLOCK RULES
+Common starter items unlocked immediately.
+Rare items unlock through Solar Systems 2–3.
+Epic items unlock through Solar Systems 4–5.
+Legendary items unlock from Boss Battles.
+Mythic items unlock from Hall of Legends.
+
+MVP
+Start with local storage.
+Do not build payments yet.
+Do not overbuild multiplayer.
+Focus on clean equip/save/preview flow.
+
+STYLE
+Use Fretboard Universe colours:
+purple, black, cosmic blue, gold.
+Make it feel premium, fun, guitar-themed and mobile friendly.
+
+FILES TO CREATE
+/src/data/wardrobe_items.json
+/src/components/AvatarPreview.tsx
+/src/components/WardrobeItemCard.tsx
+/src/pages/WardrobePage.tsx
+/src/utils/wardrobe.ts
+
+NAVIGATION
+Add Wardrobe button from the player profile/avatar area.

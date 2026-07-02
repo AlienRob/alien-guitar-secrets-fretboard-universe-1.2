@@ -1,0 +1,901 @@
+* { box-sizing: border-box; }
+
+/* ── Outer backdrop (fills whatever viewport loads the component) */
+.tuner-root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  background: #020006;
+  padding: 16px;
+}
+
+/* ── Phone shell (always 390 × 844, centred in root) ─────────── */
+.tuner-phone {
+  position: relative;
+  width: 390px;
+  height: 844px;
+  flex-shrink: 0;
+  background: #020006;
+  border-radius: 44px;
+  border: 9px solid #0b0b18;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.08),
+    inset 0 0 0 1px rgba(255,255,255,.04),
+    0 32px 90px rgba(0,0,0,.95);
+  overflow: hidden;
+}
+
+/* ── On a real phone: JS sets transform to scale the 390×844 shell ── */
+@media (max-width: 450px) {
+  .tuner-root {
+    padding: 0;
+    overflow: hidden;
+    width: 100vw;
+    height: 100dvh;
+    position: fixed;
+    top: 0; left: 0;
+  }
+  .tuner-phone {
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    position: absolute;
+    /* horizontally centred; JS sets top + transform */
+    left: 50%;
+    margin-left: -195px;
+    transform-origin: top center;
+  }
+}
+
+/* ── Inner screen (fills the phone shell) ─────────────────────── */
+.tuner-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 36px 16px 22px;
+  color: white;
+  overflow: hidden;
+  background: #020006;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* ── Background ───────────────────────────────────────────────── */
+.tuner-space-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+/* Desktop: show only the inner (phone-clipped) bg */
+.tuner-space-bg--mobile  { display: none; }
+.tuner-space-bg--desktop { display: block; }
+
+/* Mobile: fixed to viewport, not affected by scale — show only this one */
+@media (max-width: 450px) {
+  .tuner-space-bg--mobile {
+    display: block;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+  .tuner-space-bg--desktop { display: none; }
+  /* Let the fixed nebula show through the scaled shell */
+  .tuner-phone,
+  .tuner-screen { background: transparent; }
+}
+
+/* ── Dynamic island ───────────────────────────────────────────── */
+.tuner-dynamic-island {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 32px;
+  background: #000;
+  border-radius: 22px;
+  z-index: 200;
+}
+
+/* ── Home bar ─────────────────────────────────────────────────── */
+.tuner-home-bar {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 134px;
+  height: 5px;
+  background: rgba(255,255,255,.45);
+  border-radius: 3px;
+  z-index: 200;
+}
+
+/* ── Shared section stacking ──────────────────────────────────── */
+.tuner-header,
+.tuner-instrument-select,
+.tuner-readout,
+.tuner-meter,
+.tuner-fretboard,
+.tuner-tuning-select,
+.tuner-bottom {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+.tuner-mic-error {
+  text-align: center;
+  font-size: 11px;
+  color: #ff8080;
+  padding: 4px 12px;
+  margin-bottom: 4px;
+  letter-spacing: 0.03em;
+}
+
+/* ── Header ───────────────────────────────────────────────────── */
+.tuner-header {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0 0;
+}
+.tuner-top-bar {
+  width: min(88%, 320px);
+  height: auto;
+  display: block;
+}
+
+.tuner-icon-btn {
+  width: 73px;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  border: 1px solid rgba(185,66,255,.42);
+  background: rgba(3,0,10,.58);
+  padding: 18px;
+  box-shadow: 0 0 10px rgba(185,66,255,.25);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.tuner-icon-btn img { width: 100%; height: 100%; }
+
+
+/* ── Instrument select ────────────────────────────────────────── */
+.tuner-instrument-select {
+  position: relative;
+  width: min(82vw, 360px);
+  height: 50px;
+  margin: 6px auto 0;
+}
+
+.tuner-instrument-select > img.tuner-bar-bg,
+.tuner-tuning-select  > img.tuner-bar-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.tuner-inst-icon {
+  position: absolute;
+  left: 18px;
+  top: 11px;
+  width: 28px;
+  height: 28px;
+  z-index: 2;
+}
+
+.tuner-instrument-select select,
+.tuner-tuning-select select {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #fff;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  cursor: pointer;
+}
+.tuner-instrument-select select:first-of-type { width: 68%; padding-left: 60px; font-size: 13px; letter-spacing: .3px; }
+.tuner-instrument-select select:last-of-type  { width: 28%; font-size: 13px; }
+
+/* ── Note readout ─────────────────────────────────────────────── */
+.tuner-readout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px 4px;
+  gap: 8px;
+}
+.tuner-readout-centre {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tuner-note {
+  font-size: clamp(56px, 14vw, 80px);
+  line-height: 1;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 0 22px #f6b044, 0 0 54px rgba(255,156,24,.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tuner-detected {
+  font-size: clamp(13px, 3.2vw, 16px);
+  font-weight: 700;
+  margin-top: 3px;
+  color: rgba(255,255,255,.85);
+}
+
+.tuner-string-notes {
+  font-size: clamp(11px, 2.8vw, 14px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(185,66,255,.75);
+  margin-top: 2px;
+}
+
+.tuner-tune-state {
+  margin-top: 3px;
+  color: #ff697b;
+  font-size: clamp(13px, 3.5vw, 17px);
+  letter-spacing: 2.5px;
+  font-weight: 900;
+  min-height: 1.2em; /* reserve space so layout never shifts */
+}
+.tuner-tune-state.good { color: #42cbff; }
+
+/* ── Tuning meter ─────────────────────────────────────────────── */
+.tuner-meter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* ── Cent bargraph ─────────────────────────────────────────────── */
+.tuner-cents-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 100%;
+  height: 26px;
+}
+
+.tuner-cent-pip {
+  width: 9px;
+  height: 18px;
+  border-radius: 3px;
+  background: #252320;
+  transition: background 55ms linear, box-shadow 55ms linear, height 55ms linear;
+  flex-shrink: 0;
+}
+/* Centre pip — taller so it reads as the zero reference */
+.tuner-cent-pip[data-center] {
+  height: 26px;
+  border-radius: 4px;
+}
+
+.tuner-cent-pip.lit-center {
+  background: #f4c64b;
+  box-shadow: 0 0 6px 2px rgba(244,198,75,.55);
+}
+.tuner-cent-pip.lit-tune {
+  background: #1db954;
+  box-shadow: 0 0 8px 3px rgba(29,185,84,.65);
+}
+.tuner-cent-pip.lit-close {
+  background: #f4c64b;
+  box-shadow: 0 0 5px 1px rgba(244,198,75,.5);
+}
+.tuner-cent-pip.lit-flat,
+.tuner-cent-pip.lit-sharp,
+.tuner-cent-pip.lit-out {
+  background: #ff4040;
+  box-shadow: 0 0 5px 1px rgba(255,64,64,.5);
+}
+
+.tuner-meter-labels {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 0;
+  padding: 4px 0 0;
+}
+
+/* Centre column: green arrow above + glowing note */
+.tuner-meter-centre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  flex: 1;
+}
+
+.tuner-tune-arrow {
+  font-size: 22px;
+  color: #1db954;
+  text-shadow: 0 0 12px rgba(29,185,84,.9);
+  line-height: 1;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 150ms, transform 150ms;
+  pointer-events: none;
+}
+.tuner-tune-arrow.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.tuner-flat, .tuner-sharp, .tuner-zero {
+  font-weight: 900;
+  line-height: 1;
+}
+.tuner-flat, .tuner-sharp {
+  font-size: clamp(22px, 6vw, 30px);
+  -webkit-text-stroke: 0.4px currentColor;
+  flex-shrink: 0;
+  width: 60px;
+  text-align: center;
+  padding: 4px 0;
+  transition: color 120ms, opacity 120ms, text-shadow 120ms;
+}
+.tuner-flat  {
+  color: #f4c64b;
+  opacity: 0.28;
+}
+.tuner-sharp {
+  color: #ff4040;
+  opacity: 0.28;
+}
+
+/* close (±4–8 ¢): yellow arrow toward error; other side dims */
+.tuner-flat.ts-close-flat    { color: #f4c64b; opacity: 1; text-shadow: 0 0 10px rgba(244,198,75,.75); }
+.tuner-sharp.ts-close-flat   { opacity: 0.18; }
+.tuner-sharp.ts-close-sharp  { color: #f4c64b; opacity: 1; text-shadow: 0 0 10px rgba(244,198,75,.75); }
+.tuner-flat.ts-close-sharp   { opacity: 0.18; }
+
+/* out (>±8 ¢): red arrow toward error; other side dims */
+.tuner-flat.ts-out-flat    { color: #ff4040; opacity: 1; text-shadow: 0 0 10px rgba(255,64,64,.75); }
+.tuner-sharp.ts-out-flat   { opacity: 0.18; }
+.tuner-sharp.ts-out-sharp  { color: #ff4040; opacity: 1; text-shadow: 0 0 10px rgba(255,64,64,.75); }
+.tuner-flat.ts-out-sharp   { opacity: 0.18; }
+
+/* in tune: both light green */
+.tuner-flat.ts-tune,
+.tuner-sharp.ts-tune  { color: #1db954; opacity: 1; text-shadow: 0 0 10px rgba(29,185,84,.7); }
+.tuner-zero  {
+  font-size: 10px;
+  opacity: 0.45;
+  color: #f4c64b;
+  transition: color 120ms, font-size 120ms, opacity 120ms;
+}
+.tuner-zero.in-tune {
+  font-size: 18px;
+  opacity: 1;
+  color: #1db954;
+  text-shadow: 0 0 8px rgba(29,185,84,.7);
+}
+
+/* ── Fretboard (fills remaining height) ───────────────────────── */
+.tuner-fretboard {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  margin-top: 0;
+  width: 100%;
+  background: transparent;
+}
+
+/* Mask transparent sides with dark edge gradients */
+.tuner-wood {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  z-index: 1;
+  pointer-events: none;
+  /* Image is RGBA with real transparency — no mask needed */
+}
+
+/* Purple cosmic glow via pseudo — no stacking-context isolation */
+.tuner-fretboard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  box-shadow: none;
+}
+
+.tuner-glow {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 7;
+  mix-blend-mode: screen;
+  opacity: .32;
+  pointer-events: none;
+}
+
+/* ── Tapered strings ──────────────────────────────────────────── */
+.tuner-strings-svg {
+  position: absolute;
+  z-index: 8;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* strings run the full fretboard, behind the note buttons */
+  overflow: visible;
+}
+
+@keyframes tuner-str-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.65; }
+}
+.tuner-str-active { animation: tuner-str-pulse 180ms ease-in-out infinite; }
+
+/* ── Play prompt pill ─────────────────────────────────────────── */
+.tuner-play-prompt--hidden { visibility: hidden; }
+.tuner-play-prompt {
+  position: absolute;
+  z-index: 10;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1db954;
+  color: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+  padding: 9px 26px;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+/* ── Note buttons — absolute overlay near the bottom of the neck  */
+.tuner-note-row {
+  position: absolute;
+  z-index: 9;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  height: 54px;
+  pointer-events: none;
+}
+
+.tuner-note-btn {
+  position: absolute;
+  top: 8px;
+  transform: translateX(-50%);
+  width: clamp(34px, 8.5vw, 40px);
+  height: clamp(34px, 8.5vw, 40px);
+  border: 2px solid rgba(255,255,255,0.45);
+  padding: 0;
+  background: rgba(6,3,0,0.88);
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: all;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 4px rgba(0,0,0,.6);
+  transition: box-shadow 0.15s, background 0.15s, border-color 0.15s;
+}
+.tuner-note-btn.active {
+  background: rgba(28,14,0,0.92);
+  border-color: rgba(228,180,48,.7);
+  box-shadow: 0 0 18px rgba(228,180,48,.85), 0 0 6px rgba(228,180,48,.4);
+}
+.tuner-note-btn b {
+  font-size: clamp(13px, 3.6vw, 17px);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ── Tuning preset select ─────────────────────────────────────── */
+.tuner-tuning-select {
+  position: relative;
+  width: min(78vw, 340px);
+  height: 46px;
+  margin: 4px auto 0;
+}
+.tuner-tuning-select select {
+  width: 100%;
+  padding: 0 48px;
+  text-align: center;
+  color: #d150ff;
+  font-size: clamp(13px, 3.8vw, 18px);
+}
+
+/* ── Bottom panel — in normal flex flow, never clipped ────────── */
+.tuner-bottom {
+  position: relative;
+  z-index: 13;
+  width: 100%;
+  height: 152px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+/* ── STRING RESONANCE (left column) ──────────────────────────── */
+.tuner-resonance {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.tuner-waveform {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 32px;
+}
+
+.tuner-waveform span {
+  display: block;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #42cbff 0%, #7c40ff 100%);
+  transform-origin: center;
+  animation: tuner-wave 750ms ease-in-out infinite;
+}
+.tuner-waveform span:nth-child(1)  { height: 6px;  animation-delay: 0ms; }
+.tuner-waveform span:nth-child(2)  { height: 12px; animation-delay: 75ms; }
+.tuner-waveform span:nth-child(3)  { height: 20px; animation-delay: 150ms; }
+.tuner-waveform span:nth-child(4)  { height: 26px; animation-delay: 225ms; }
+.tuner-waveform span:nth-child(5)  { height: 22px; animation-delay: 300ms; }
+.tuner-waveform span:nth-child(6)  { height: 28px; animation-delay: 375ms; }
+.tuner-waveform span:nth-child(7)  { height: 18px; animation-delay: 450ms; }
+.tuner-waveform span:nth-child(8)  { height: 24px; animation-delay: 525ms; }
+.tuner-waveform span:nth-child(9)  { height: 14px; animation-delay: 600ms; }
+.tuner-waveform span:nth-child(10) { height: 8px;  animation-delay: 675ms; }
+
+@keyframes tuner-wave {
+  0%, 100% { transform: scaleY(1); }
+  50%       { transform: scaleY(.25); }
+}
+
+.tuner-bottom-label {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,.55);
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+}
+.tuner-bottom-status {
+  font-size: 12px;
+  color: #42cbff;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+/* ── Galactic core (center tap button) ───────────────────────── */
+.tuner-core-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.tuner-core-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  pointer-events: none;
+  transition: color 0.3s;
+}
+.tuner-core.balanced ~ .tuner-core-label,
+.tuner-core-wrap:has(.tuner-core.balanced) .tuner-core-label {
+  color: #1db954;
+}
+.tuner-core.close ~ .tuner-core-label,
+.tuner-core-wrap:has(.tuner-core.close) .tuner-core-label {
+  color: #f4c64b;
+}
+.tuner-core.out ~ .tuner-core-label,
+.tuner-core-wrap:has(.tuner-core.out) .tuner-core-label {
+  color: #ff4040;
+}
+.tuner-core {
+  position: relative;
+  z-index: 2;
+  width: 120px;
+  height: 120px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  transition: filter 0.3s, transform 0.3s;
+}
+.tuner-core-bg,
+.tuner-core-logo { grid-area: 1 / 1; }
+.tuner-core-bg { width: 100%; height: 100%; }
+.tuner-core-logo {
+  width: 46%;
+  height: 46%;
+  object-fit: contain;
+  opacity: .9;
+  filter: drop-shadow(0 0 8px #f7da73);
+}
+.tuner-core.balanced {
+  filter: drop-shadow(0 0 22px #1db954);
+  transform: scale(1.06);
+}
+.tuner-core.close {
+  filter: drop-shadow(0 0 16px #f4c64b);
+}
+.tuner-core.out {
+  filter: drop-shadow(0 0 16px #ff4040);
+}
+
+/* ── A4 frequency drum roller (right column) ─────────────────── */
+.tuner-a4-section {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.tuner-a4-label {
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,.55);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.tuner-a4-wheel-wrap {
+  position: relative;
+  height: 54px;
+  width: 76px;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid rgba(185,66,255,.4);
+  background: rgba(8,0,24,.6);
+}
+.tuner-a4-wheel-wrap::before,
+.tuner-a4-wheel-wrap::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 18px;
+  z-index: 2;
+  pointer-events: none;
+}
+.tuner-a4-wheel-wrap::before {
+  top: 0;
+  background: linear-gradient(180deg, rgba(8,0,24,.95) 0%, transparent 100%);
+}
+.tuner-a4-wheel-wrap::after {
+  bottom: 0;
+  background: linear-gradient(0deg, rgba(8,0,24,.95) 0%, transparent 100%);
+}
+
+/* centre-line highlight */
+.tuner-a4-wheel-wrap::before {
+  box-shadow: inset 0 27px 0 rgba(185,66,255,.12), inset 0 28px 0 rgba(185,66,255,.12);
+}
+
+.tuner-a4-wheel {
+  height: 100%;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  padding: 15px 0;
+}
+.tuner-a4-wheel::-webkit-scrollbar { display: none; }
+
+.tuner-a4-tick {
+  height: 24px;
+  scroll-snap-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,.28);
+  transition: color 120ms, font-size 120ms;
+  user-select: none;
+}
+.tuner-a4-tick.sel {
+  color: #f5d46b;
+  font-size: 15px;
+}
+
+/* ── Overlay panels (tuning picker + settings) ────────────────── */
+.tuner-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0,0,0,.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tuner-sheet {
+  width: 92%;
+  background: linear-gradient(180deg, #120028 0%, #06000f 100%);
+  border: 1px solid rgba(185,66,255,.35);
+  border-radius: 20px;
+  padding: 20px 28px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 85%;
+}
+
+.tuner-sheet-handle {
+  width: 40px;
+  height: 4px;
+  background: rgba(255,255,255,.2);
+  border-radius: 2px;
+  margin: 0 auto 2px;
+}
+
+.tuner-sheet-title {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,.45);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.tuner-sheet-list {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 52vh;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.tuner-sheet-list::-webkit-scrollbar { display: none; }
+
+.tuner-sheet-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px 24px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  background: rgba(255,255,255,.05);
+  cursor: pointer;
+  text-align: left;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.tuner-sheet-row.active {
+  border-color: rgba(185,66,255,.6);
+  background: rgba(185,66,255,.15);
+}
+.tuner-sheet-label {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.tuner-sheet-notes {
+  font-size: 15px;
+  color: rgba(185,66,255,.8);
+  font-weight: 600;
+  letter-spacing: .5px;
+  white-space: nowrap;
+}
+
+.tuner-sheet-close {
+  margin-top: 4px;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(185,66,255,.3);
+  background: rgba(185,66,255,.1);
+  color: #d150ff;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Settings panel specifics */
+.tuner-settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+}
+.tuner-settings-label {
+  font-size: 21px;
+  font-weight: 700;
+  color: rgba(255,255,255,.6);
+  letter-spacing: .5px;
+  flex-shrink: 0;
+}
+.tuner-a4-select {
+  flex: 1;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(185,66,255,.35);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 10px 12px;
+  appearance: auto;
+  cursor: pointer;
+}
+.tuner-a4-input {
+  width: 88px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid #f5d46b;
+  border-radius: 10px;
+  color: #f5d46b;
+  font-size: 18px;
+  font-weight: 800;
+  padding: 8px 10px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.tuner-settings-hz {
+  font-size: 18px;
+  font-weight: 800;
+  color: #f5d46b;
+  flex-shrink: 0;
+  min-width: 62px;
+  text-align: right;
+  cursor: pointer;
+  user-select: none;
+}
+.tuner-settings-hint {
+  font-size: 11px;
+  color: rgba(255,255,255,.3);
+  text-align: center;
+  margin: 0;
+  letter-spacing: .3px;
+}
+
+@keyframes tuner-vibrate {
+  0%   { transform: translateX(calc(-50% - var(--vibe))); }
+  50%  { transform: translateX(calc(-50% + var(--vibe))); }
+  100% { transform: translateX(calc(-50% - var(--vibe))); }
+}

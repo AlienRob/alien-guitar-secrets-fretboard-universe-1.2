@@ -1,0 +1,611 @@
+.ags-hall {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  overflow: hidden;
+}
+
+.ags-stage {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 3 / 2;
+  width: min(100%, 150vh);
+  max-height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  background: #000;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* Blurred, dimmed copy of the scene that fills the whole viewport behind the
+   fixed-ratio stage, so the letterbox bars don't read as wasted black space. */
+.ags-hall-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(34px) brightness(0.4) saturate(1.1);
+  transform: scale(1.15);
+  pointer-events: none;
+}
+
+.ags-hall-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Standalone galaxy disc (transparent PNG) sitting inside the archway.
+   It spins continuously — the vortex is always alive, whether or not a guitar
+   is in use. Because it's its own circular image, nothing around it (pillars,
+   arch stone) moves. */
+.ags-vortex {
+  position: absolute;
+  left: 50.2%;
+  top: 41%;
+  width: 46%;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  z-index: 0;
+  animation: ags-spin 18s linear infinite;
+  will-change: transform;
+}
+
+/* Gold brand lockup across the top of the hall */
+.ags-logo {
+  position: absolute;
+  top: 2.4%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  width: 42%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6%;
+  pointer-events: none;
+}
+
+.ags-logo-head {
+  width: 15%;
+  height: auto;
+  filter: drop-shadow(0 0 10px rgba(255, 205, 80, 0.55));
+}
+
+.ags-logo-text {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.9))
+    drop-shadow(0 2px 8px rgba(0, 0, 0, 0.85))
+    drop-shadow(0 0 14px rgba(255, 190, 60, 0.4));
+}
+
+/* Rising energy particles (only when powered) */
+.ags-energy-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.ags-stage.is-equipped .ags-energy-particles {
+  opacity: 1;
+}
+
+.ags-energy-particles span {
+  position: absolute;
+  bottom: 12%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #c9b3ff, rgba(106, 0, 255, 0));
+  animation-name: ags-rise;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+  opacity: 0;
+}
+
+/* Guitar lifted above the stairs, levitating into the vortex */
+.ags-guitar-stage {
+  position: absolute;
+  left: 50.2%;
+  top: 49%;
+  height: 42%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    left 0.95s cubic-bezier(0.45, 0, 0.2, 1),
+    top 0.95s cubic-bezier(0.45, 0, 0.2, 1),
+    height 0.95s cubic-bezier(0.45, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+/* Outer wrapper = 3D perspective for the lateral spin. */
+.ags-guitar-levitate {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1400px;
+}
+
+/* On equip, the guitar is "seen to go to its place": it descends out of the
+   portal, scaling up and settling into the levitation spot. Plays once. */
+.ags-stage.is-equipped .ags-guitar-levitate {
+  animation: ags-arrive 1.15s cubic-bezier(0.2, 0.72, 0.2, 1) both;
+}
+
+/* When the guitar flies in from a wall niche, the left/top/height transition on
+   .ags-guitar-stage carries it across, so the portal "descend" must stand down
+   (otherwise it scales-from-nothing on top of the flight). The portal arrival
+   is kept only for guitars with no niche (.is-portal). */
+.ags-guitar-stage.is-flying .ags-guitar-levitate {
+  animation: none;
+}
+
+@keyframes ags-arrive {
+  0% {
+    transform: translateY(-34%) scale(0.4);
+    opacity: 0;
+    filter: blur(4px);
+  }
+  55% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+/* "Closer look" pill (top-right, clear of the top-left exit) opens the cabinet close-up overlay. */
+.ags-closer-btn {
+  position: absolute;
+  top: 3%;
+  right: 3%;
+  z-index: 6;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 205, 90, 0.55);
+  background: linear-gradient(180deg, rgba(30, 18, 56, 0.85), rgba(10, 7, 23, 0.85));
+  padding: 0.5rem 0.95rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #ffd86b;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.ags-closer-btn:hover {
+  border-color: rgba(255, 215, 110, 0.9);
+  box-shadow: 0 0 20px rgba(255, 190, 60, 0.35);
+}
+
+.ags-closer-btn svg {
+  height: 1rem;
+  width: 1rem;
+}
+
+/* Fixed exit out of the full-screen hall, back to the rest of the app. Sits
+   above the close-up overlay (z 50) so it's reachable from the cabinet too. */
+.ags-hall-exit {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 179, 255, 0.5);
+  background: linear-gradient(180deg, rgba(30, 18, 56, 0.9), rgba(10, 7, 23, 0.9));
+  color: #e9e0ff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.ags-hall-exit:hover {
+  border-color: rgba(201, 179, 255, 0.9);
+  box-shadow: 0 0 18px rgba(120, 80, 220, 0.4);
+}
+
+.ags-hall-exit svg {
+  height: 1.05rem;
+  width: 1.05rem;
+}
+
+/* A won guitar hanging in its wall niche. Absolutely positioned + width:auto so
+   it shrink-wraps the image and centres on the niche, exactly like the dais. */
+.ags-wall-guitar {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: auto;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    filter 0.18s ease;
+}
+
+.ags-wall-guitar-img {
+  height: 100%;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.65));
+  transition: filter 0.18s ease;
+}
+
+/* The 3D model on the wall is a canvas: give it a width (height-driven via the
+   guitar aspect) and let clicks pass through to the button that features it. */
+.ags-wall-guitar-img--3d {
+  width: auto;
+  aspect-ratio: 0.34;
+  pointer-events: none;
+}
+
+.ags-wall-guitar:hover,
+.ags-wall-guitar:focus-visible {
+  transform: translate(-50%, -50%) scale(1.09);
+  outline: none;
+}
+
+.ags-wall-guitar:hover .ags-wall-guitar-img,
+.ags-wall-guitar:focus-visible .ags-wall-guitar-img {
+  filter: drop-shadow(0 0 14px rgba(255, 200, 90, 0.85))
+    drop-shadow(0 10px 16px rgba(0, 0, 0, 0.65));
+}
+
+/* Permanent No. tag, revealed on hover/focus so the wall stays uncluttered. */
+.ags-wall-num {
+  position: absolute;
+  left: 50%;
+  bottom: -1.1rem;
+  transform: translateX(-50%);
+  min-width: 1.3rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 205, 90, 0.7);
+  background: rgba(10, 7, 23, 0.92);
+  color: #ffd86b;
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  pointer-events: none;
+}
+
+.ags-wall-guitar:hover .ags-wall-num,
+.ags-wall-guitar:focus-visible .ags-wall-num {
+  opacity: 1;
+}
+
+/* Empty-hall message for players who haven't won a guitar yet. */
+.ags-hall-empty {
+  position: absolute;
+  left: 50%;
+  top: 49%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  max-width: 22rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-align: center;
+  padding: 1.1rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 205, 90, 0.5);
+  background: linear-gradient(180deg, rgba(22, 13, 44, 0.92), rgba(8, 5, 20, 0.94));
+}
+
+.ags-hall-empty strong {
+  color: #ffd86b;
+  font-size: 1.05rem;
+}
+
+.ags-hall-empty span {
+  color: rgba(220, 200, 255, 0.82);
+  font-size: 0.85rem;
+}
+
+/* Cabinet close-up rendered as a full-viewport overlay over the hall. */
+.ags-closeup {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+}
+
+/* Numbered hanger tag shown beneath the stored guitar on the wall. */
+.ags-hanger-tag {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  min-width: 1.7em;
+  padding: 0.1em 0.45em;
+  border-radius: 999px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(0.6rem, 1.2vw, 0.95rem);
+  font-weight: 700;
+  text-align: center;
+  color: #ffd86b;
+  background: linear-gradient(180deg, rgba(22, 13, 44, 0.95), rgba(8, 5, 20, 0.96));
+  border: 1px solid rgba(255, 205, 90, 0.6);
+  box-shadow:
+    0 0 14px rgba(255, 190, 60, 0.35),
+    inset 0 0 8px rgba(255, 190, 60, 0.15);
+  pointer-events: none;
+  animation: ags-tag-in 0.5s ease 0.55s both;
+}
+
+@keyframes ags-tag-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -30%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Inner image = slow lateral (turntable) spin around the vertical axis. */
+.ags-floating-guitar {
+  height: 100%;
+  width: auto;
+  display: block;
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+  filter: drop-shadow(0 22px 34px rgba(0, 0, 0, 0.7));
+}
+
+/* The live 3D model is a canvas, so it needs a width to render: derive it from
+   the (height-driven) dais slot via the guitar's aspect ratio. */
+.ags-floating-guitar--3d {
+  width: auto;
+  aspect-ratio: 0.34;
+}
+
+/* The 3D model is static (it has its own controls), so cancel the CSS turntable
+   spin that the flat thumbnail uses on the dais. Double class keeps this more
+   specific than the general `.ags-floating-guitar` spin rule below. */
+.ags-stage.is-equipped .ags-floating-guitar.ags-floating-guitar--3d {
+  animation: none;
+}
+
+/* The guitar only does its turntable spin while it's in use; put away it rests
+   statically in its display spot. */
+.ags-stage.is-equipped .ags-floating-guitar {
+  animation: ags-lateral 9s linear infinite;
+}
+
+.ags-guitar-glow {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(150, 90, 255, 0.55), transparent 65%);
+  filter: blur(28px);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  animation: ags-pulse 3.4s ease-in-out infinite;
+}
+
+/* Glow halo is a "powered" effect — only when the guitar is in use. */
+.ags-stage.is-equipped .ags-guitar-glow {
+  opacity: 1;
+}
+
+/* Equip toggle */
+.ags-equip-btn {
+  position: absolute;
+  bottom: 1.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 179, 255, 0.6);
+  background: linear-gradient(135deg, rgba(106, 0, 255, 0.92), rgba(0, 120, 200, 0.92));
+  color: #fff;
+  font-size: clamp(0.7rem, 1.4vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(106, 0, 255, 0.5);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.ags-equip-btn:hover {
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 10px 30px rgba(106, 0, 255, 0.65);
+}
+
+.ags-equip-btn:active {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Museum name plaque that stands with the featured guitar on the dais. */
+.ags-plaque {
+  position: absolute;
+  left: 50.2%;
+  bottom: 7%;
+  transform: translateX(-50%);
+  z-index: 4;
+  min-width: 11rem;
+  max-width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 0.45rem 1.4rem;
+  border-radius: 8px;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", serif;
+  background: linear-gradient(180deg, rgba(58, 41, 12, 0.96), rgba(26, 17, 6, 0.97));
+  border: 1px solid rgba(255, 205, 90, 0.7);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.55),
+    0 0 22px rgba(255, 190, 60, 0.28),
+    inset 0 1px 0 rgba(255, 220, 140, 0.35);
+  pointer-events: none;
+  animation: ags-tag-in 0.5s ease 0.55s both;
+}
+
+.ags-plaque-name {
+  color: #ffd86b;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-size: clamp(0.85rem, 1.7vw, 1.15rem);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.ags-plaque-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgba(255, 230, 180, 0.85);
+  font-size: clamp(0.6rem, 1.1vw, 0.8rem);
+}
+
+.ags-plaque-meta em {
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ags-plaque-dot {
+  opacity: 0.6;
+}
+
+@keyframes ags-spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Lateral (turntable) spin around the vertical axis */
+@keyframes ags-lateral {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(-360deg);
+  }
+}
+
+@keyframes ags-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes ags-rise {
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-46vh) scale(1.1);
+    opacity: 0;
+  }
+}
+
+/* Phones: the hall art is a wide 3:2 room, so fitting it to a tall screen
+   leaves it a thin band. Instead, fill the screen height and let the sides
+   crop — "take the room's depth, not its width". Because every element inside
+   the stage is positioned in % of the stage, scaling the whole stage up keeps
+   the guitar, vortex, plaque and niches aligned; only the outer wall niches
+   fall off the edges (the wall is background here). The featured guitar and
+   "Closer look" stay large and central. */
+@media (max-width: 768px) {
+  .ags-stage {
+    width: auto;
+    height: 100vh;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+  }
+
+  /* No letterbox bars to fill once the stage covers the screen. */
+  .ags-hall-backdrop {
+    display: none;
+  }
+
+  /* Bump the two key controls so they're easy to hit on a phone. */
+  .ags-closer-btn {
+    font-size: 0.95rem;
+    padding: 0.6rem 1.1rem;
+  }
+
+  .ags-equip-btn {
+    font-size: 0.95rem;
+    padding: 12px 26px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ags-vortex,
+  .ags-floating-guitar,
+  .ags-stage.is-equipped .ags-floating-guitar,
+  .ags-guitar-glow,
+  .ags-energy-particles span,
+  .ags-hanger-tag,
+  .ags-plaque,
+  .ags-stage.is-equipped .ags-guitar-levitate {
+    animation: none;
+  }
+
+  .ags-guitar-stage {
+    transition: opacity 0.5s ease;
+  }
+}

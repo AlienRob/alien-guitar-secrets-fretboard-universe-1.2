@@ -1,0 +1,534 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: AGS Fretboard Universe + Guitar Practice API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: profile
+    description: User profile and progression
+  - name: challenges
+    description: Practice challenge sessions
+  - name: achievements
+    description: Achievements and rewards
+  - name: leaderboard
+    description: Leaderboard
+  - name: quests
+    description: Daily quests
+
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  # ── Profile ──────────────────────────────────────────────
+  /profile:
+    get:
+      operationId: getProfile
+      tags: [profile]
+      summary: Get current user profile with full progression
+      responses:
+        "200":
+          description: Full user profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Profile"
+    patch:
+      operationId: updateProfile
+      tags: [profile]
+      summary: Update username
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProfileUpdate"
+      responses:
+        "200":
+          description: Updated profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Profile"
+
+  /profile/summary:
+    get:
+      operationId: getProfileSummary
+      tags: [profile]
+      summary: Dashboard summary — XP, level, streak, belt, planet progress
+      responses:
+        "200":
+          description: Dashboard summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardSummary"
+
+  /profile/trail:
+    patch:
+      operationId: updateTrail
+      tags: [profile]
+      summary: Persist beginner trail flag(s) to the server-side profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TrailFlagsUpdate"
+      responses:
+        "200":
+          description: Merged trail flags after the update
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrailFlags"
+
+  /profile/redeem-code:
+    post:
+      operationId: redeemPremiumCode
+      tags: [profile]
+      summary: Redeem a premium access code to unlock premium without payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RedeemCodeInput"
+      responses:
+        "200":
+          description: Code accepted; premium unlocked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RedeemCodeResult"
+        "400":
+          description: Invalid or missing code
+
+  /profile/stats:
+    get:
+      operationId: getProfileStats
+      tags: [profile]
+      summary: Per-exercise-type stats
+      responses:
+        "200":
+          description: Stats per exercise type
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ExerciseStat"
+
+  # ── Challenges ───────────────────────────────────────────
+  /challenges:
+    get:
+      operationId: listChallenges
+      tags: [challenges]
+      summary: List recent challenge sessions
+      parameters:
+        - in: query
+          name: exerciseType
+          schema:
+            type: string
+            enum: [fretboard, intervals, scales, chords, ear_training]
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 20
+      responses:
+        "200":
+          description: List of challenges
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Challenge"
+    post:
+      operationId: submitChallenge
+      tags: [challenges]
+      summary: Submit a completed challenge and receive XP + rewards
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChallengeInput"
+      responses:
+        "201":
+          description: Challenge result with XP and new achievements
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChallengeResult"
+
+  /challenges/recent:
+    get:
+      operationId: getRecentActivity
+      tags: [challenges]
+      summary: Recent activity feed (last 10 challenges across all types)
+      responses:
+        "200":
+          description: Recent challenges
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Challenge"
+
+  # ── Achievements ─────────────────────────────────────────
+  /achievements:
+    get:
+      operationId: listAchievements
+      tags: [achievements]
+      summary: All achievements with unlock status
+      responses:
+        "200":
+          description: Achievement list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Achievement"
+
+  # ── Leaderboard ──────────────────────────────────────────
+  /leaderboard:
+    get:
+      operationId: getLeaderboard
+      tags: [leaderboard]
+      summary: Top players by XP
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            default: 20
+      responses:
+        "200":
+          description: Leaderboard
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LeaderboardEntry"
+
+  # ── Daily Quests ─────────────────────────────────────────
+  /quests/daily:
+    get:
+      operationId: getDailyQuests
+      tags: [quests]
+      summary: Today's daily quests with completion status
+      responses:
+        "200":
+          description: Daily quests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DailyQuest"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+
+    Profile:
+      type: object
+      required: [id, username, xp, level, belt, streak, totalChallenges, solarSystem, planet, createdAt]
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        xp:
+          type: integer
+        level:
+          type: integer
+        belt:
+          type: string
+          enum: [white, yellow, orange, green, blue, purple, brown, black, alien_master, galactic_master]
+        streak:
+          type: integer
+        totalChallenges:
+          type: integer
+        solarSystem:
+          type: integer
+        planet:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+
+    ProfileUpdate:
+      type: object
+      properties:
+        username:
+          type: string
+          minLength: 2
+          maxLength: 30
+
+    RedeemCodeInput:
+      type: object
+      required: [code]
+      properties:
+        code:
+          type: string
+          minLength: 1
+
+    RedeemCodeResult:
+      type: object
+      required: [isPremium]
+      properties:
+        isPremium:
+          type: boolean
+
+    TrailFlags:
+      type: object
+      required: [findingNotesViewed, intervalsViewed, practiceStarted, scaleLessonViewed, chordLessonViewed]
+      properties:
+        findingNotesViewed:
+          type: boolean
+        intervalsViewed:
+          type: boolean
+        practiceStarted:
+          type: boolean
+        scaleLessonViewed:
+          type: boolean
+        chordLessonViewed:
+          type: boolean
+
+    TrailFlagsUpdate:
+      type: object
+      description: All fields are optional; only supplied fields are merged into the stored flags.
+      properties:
+        findingNotesViewed:
+          type: boolean
+        intervalsViewed:
+          type: boolean
+        practiceStarted:
+          type: boolean
+        scaleLessonViewed:
+          type: boolean
+        chordLessonViewed:
+          type: boolean
+
+    DashboardSummary:
+      type: object
+      required: [xp, level, belt, streak, totalChallenges, todayChallenges, weeklyXp, accuracyRate, solarSystem, planet, xpToNextLevel, questsCompleted, questsTotal, isPremium, fullAccess, trailFlags]
+      properties:
+        isPremium:
+          type: boolean
+        fullAccess:
+          type: boolean
+        xp:
+          type: integer
+        level:
+          type: integer
+        belt:
+          type: string
+        streak:
+          type: integer
+        totalChallenges:
+          type: integer
+        todayChallenges:
+          type: integer
+        weeklyXp:
+          type: integer
+        accuracyRate:
+          type: number
+        solarSystem:
+          type: integer
+        planet:
+          type: integer
+        xpToNextLevel:
+          type: integer
+        questsCompleted:
+          type: integer
+        questsTotal:
+          type: integer
+        trailFlags:
+          $ref: "#/components/schemas/TrailFlags"
+
+    ExerciseStat:
+      type: object
+      required: [exerciseType, totalChallenges, averageScore, bestScore, totalCorrect, totalQuestions]
+      properties:
+        exerciseType:
+          type: string
+          enum: [fretboard, intervals, scales, chords, ear_training]
+        totalChallenges:
+          type: integer
+        averageScore:
+          type: number
+        bestScore:
+          type: integer
+        totalCorrect:
+          type: integer
+        totalQuestions:
+          type: integer
+
+    Challenge:
+      type: object
+      required: [id, userId, exerciseType, score, totalQuestions, correctAnswers, durationSeconds, xpEarned, completedAt]
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        exerciseType:
+          type: string
+          enum: [fretboard, intervals, scales, chords, ear_training]
+        score:
+          type: integer
+        totalQuestions:
+          type: integer
+        correctAnswers:
+          type: integer
+        durationSeconds:
+          type: integer
+        xpEarned:
+          type: integer
+        completedAt:
+          type: string
+          format: date-time
+
+    ChallengeInput:
+      type: object
+      required: [exerciseType, totalQuestions, correctAnswers, durationSeconds]
+      properties:
+        exerciseType:
+          type: string
+          enum: [fretboard, intervals, scales, chords, ear_training]
+        totalQuestions:
+          type: integer
+        correctAnswers:
+          type: integer
+        durationSeconds:
+          type: integer
+        boss:
+          type: boolean
+          description: >-
+            True when this submission is a Boss Battle. Boss challenges earn a
+            large XP bonus (scaled by accuracy) on top of the normal amount.
+
+    ChallengeResult:
+      type: object
+      required: [challenge, xpEarned, leveledUp, newLevel, newBelt, newAchievements, questProgress]
+      properties:
+        challenge:
+          $ref: "#/components/schemas/Challenge"
+        xpEarned:
+          type: integer
+        leveledUp:
+          type: boolean
+        newLevel:
+          type: integer
+        newBelt:
+          type: ["string", "null"]
+        newAchievements:
+          type: array
+          items:
+            $ref: "#/components/schemas/Achievement"
+        questProgress:
+          type: array
+          items:
+            $ref: "#/components/schemas/QuestProgress"
+
+    Achievement:
+      type: object
+      required: [id, key, title, description, category, xpReward, unlockedAt]
+      properties:
+        id:
+          type: integer
+        key:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+          enum: [fretboard, intervals, scales, chords, ear_training, streak, level, belt, general]
+        xpReward:
+          type: integer
+        unlockedAt:
+          type: ["string", "null"]
+          format: date-time
+
+    LeaderboardEntry:
+      type: object
+      required: [rank, userId, username, xp, level, belt]
+      properties:
+        rank:
+          type: integer
+        userId:
+          type: integer
+        username:
+          type: string
+        xp:
+          type: integer
+        level:
+          type: integer
+        belt:
+          type: string
+
+    DailyQuest:
+      type: object
+      required: [id, title, description, exerciseType, targetCount, currentCount, xpReward, completed]
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        exerciseType:
+          type: string
+          enum: [fretboard, intervals, scales, chords, ear_training, any]
+        targetCount:
+          type: integer
+        currentCount:
+          type: integer
+        xpReward:
+          type: integer
+        completed:
+          type: boolean
+
+    QuestProgress:
+      type: object
+      required: [questId, title, completed, currentCount, targetCount]
+      properties:
+        questId:
+          type: integer
+        title:
+          type: string
+        completed:
+          type: boolean
+        currentCount:
+          type: integer
+        targetCount:
+          type: integer
