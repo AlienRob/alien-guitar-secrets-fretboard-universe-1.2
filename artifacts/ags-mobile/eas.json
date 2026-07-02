@@ -9,11 +9,17 @@
       "ios": {
         "simulator": false,
         "image": "latest"
+      },
+      "android": {
+        "image": "latest"
       }
     },
     "production": {
       "autoIncrement": true,
       "ios": {
+        "image": "latest"
+      },
+      "android": {
         "image": "latest"
       }
     }
