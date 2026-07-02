@@ -489,6 +489,9 @@ importers:
 
   artifacts/ags-mobile:
     dependencies:
+      '@workspace/native-metronome':
+        specifier: workspace:*
+        version: link:modules/native-metronome
       expo-asset:
         specifier: ~12.0.13
         version: 12.0.13(expo@54.0.35)(react-native@0.81.5(@babel/core@7.29.7)(@types/react@19.1.17)(react@19.1.0))(react@19.1.0)(typescript@5.9.3)
@@ -664,6 +667,8 @@ importers:
       zod-validation-error:
         specifier: ^3.4.0
         version: 3.5.4(zod@3.25.76)
+
+  artifacts/ags-mobile/modules/native-metronome: {}
 
   artifacts/ags-precision-labs:
     devDependencies:
