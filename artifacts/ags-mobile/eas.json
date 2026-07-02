@@ -6,14 +6,16 @@
   "build": {
     "preview": {
       "distribution": "internal",
-      "image": "latest",
       "ios": {
-        "simulator": false
+        "simulator": false,
+        "image": "latest"
       }
     },
     "production": {
       "autoIncrement": true,
-      "image": "latest"
+      "ios": {
+        "image": "latest"
+      }
     }
   },
   "submit": {
